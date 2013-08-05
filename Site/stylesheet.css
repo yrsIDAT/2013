@@ -1,0 +1,22 @@
+/* CSS Document */
+html { width: 100%; margin: 0; height: 100%; }
+body { width: 100%; margin: 0; height: 100%; background-image: url(assets/background.png); background-size: cover; background-repeat: no-repeat; font-family: 'OpenSansRegular', sans-serif; }
+#logo { background-image: url(assets/logo.png); height: 46px; width: 199px; background-repeat: no-repeat; position: relative; background-position: 50% 50%; padding: 29px; }
+#searchcontainer { position: absolute; height: 100%; display: table; width: 100%; top: 0; text-align: center; }
+#search { width: 540px; margin: 0 auto; display: table-cell; vertical-align: middle; }
+#searchbox { font-size: 40px; font-family: 'OpenSansLight', sans-serif; color: #fff; }
+.homesearch { border: none; border-bottom: 4px solid #fff; background: transparent; width: 50%; max-width: 450px; height: 40px; font-size: 40px; color: #fff; padding-bottom: 5px; }
+::-webkit-input-placeholder {
+color: #fff;
+}
+::-ms-input-placeholder {
+color: #fff;
+}
+::-o-input-placeholder {
+color: #fff;
+}
+::-moz-input-placeholder {
+color: #fff;
+}
+.homesearch:focus { outline: none; }
+#localhome { position: absolute; bottom: 10px; left: 10px; color: #fff; font-size: 16px; }
