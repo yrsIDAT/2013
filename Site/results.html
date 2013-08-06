@@ -2,9 +2,10 @@
 <html>
 <head><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://ricostacruz.com/jquery.transit/jquery.transit.min.js"> </script>
+<script src="main.js"></script>
 <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 <link rel="stylesheet" type="text/css" href="fonts/fonts.css"/>
-<meta name="viewport" content="width=480, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=480px, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <meta name="HandheldFriendly" content="True" />
 <meta name="MobileOptimized" content="480" />
 <link rel="stylesheet" type="text/css" media="only screen and (min-width: 1585px)" href="1585.css" /><link rel="stylesheet" type="text/css" media="only screen and (max-width: 1584px)" href="1193.css" /><link rel="stylesheet" type="text/css" media="only screen and (max-width: 1192px)" href="802.css" /><link rel="stylesheet" type="text/css" media="only screen and (max-width: 801px)" href="407.css" /><link rel="stylesheet" type="text/css" media="handheld, only screen and (max-width: 801px)" href="407.css" />
@@ -15,15 +16,15 @@
 <title>Results Template</title>
 </head>
 
-<body>
+<body onload="initialise()">
 	<div id="head"> 
     	<a href="/"><div id="logoresults"></div> </a>
         <div id="resultssearch"> 
           <!--Header Search Box-->
         	<form name="rs" action="" method="get" class="resultform"> 
             	<div id="iwantresults"> I want to... </div>
-            	<input name="searchresult" type="text" class="searchresult"> 
-                <input name="submitresult" type="submit" value="" class="submitresult">
+            	<input id="searchterm" type="text" class="searchresult"> 
+                <input id="searchsubmit" type="submit" value="" class="submitresult" onsubmit="sendSearch()">
             </form>
         </div>
     </div>
