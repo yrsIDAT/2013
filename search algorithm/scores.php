@@ -14,7 +14,7 @@
 		for ($i = 0; $i < activitiesLength; $i++)
 		{
 			$activities[$i]->score = 0;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * $conditions->weather->condition;
+			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * getConditionNumber($conditions->weather->condition);
 			$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * $conditions->weather->temperature;
 			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * $conditions->weather->precipitation;
 			
@@ -22,6 +22,22 @@
 		}
 		
 		return $activities;
+	}
+	
+	function getConditionNumber($condition)
+	{
+		if ($condition == "sun")
+		{
+			return 1;
+		}
+		else if ($condition == "cloud")
+		{
+			return 0.5;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	
 	class Weighting
