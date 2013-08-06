@@ -303,6 +303,7 @@
  * ------------------------------------------------------
  */
 	// Mark a start point so we can benchmark the controller
+
 	$BM->mark('controller_execution_time_( '.$class.' / '.$method.' )_start');
 
 	$CI = new $class();
