@@ -14,9 +14,9 @@
 		for ($i = 0; $i < activitiesLength; $i++)
 		{
 			$activities[$i]->score = 0;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * $conditions[$activities[$i]->typeid]->weather->condition;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * $conditions[$activities[$i]->typeid]->weather->temperature;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * $conditions[$activities[$i]->typeid]->weather->precipitation;
+			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * $conditions->weather->condition;
+			$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * $conditions->weather->temperature;
+			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * $conditions->weather->precipitation;
 			
 			$activities[$i]->score += $weightings[$activities[$i]->type]->distance * (1 - $activities[$i]->distance);
 		}
