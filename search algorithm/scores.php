@@ -2,11 +2,11 @@
 	function calculateScores($activities, $conditions)
 	{
 		$weightings = Array(
-			new Weighting(0, 0),
-			new Weighting(1, 1),
-			new Weighting(-0.5, 0),
-			new Weighting(0.5, 1),
-			new Weighting(0, 1)
+			new Weighting(0, 0, 0),
+			new Weighting(1, 1, 0.5),
+			new Weighting(-0.5, 0, 0.5),
+			new Weighting(0.5, 1, 1),
+			new Weighting(0, 1, 0.2)
 		);
 		
 		$activitiesLength = sizeOf($activities);
@@ -18,7 +18,7 @@
 			$activities[$i]->score += $weightings[$activities[$i]->typeid]->temperature * $conditions[$activities[$i]->typeid]->weather->temperature;
 			$activities[$i]->score += $weightings[$activities[$i]->typeid]->precipitation * $conditions[$activities[$i]->typeid]->weather->precipitation;
 			
-			$activities[$i]->score += $weightings[$activities[$i]->typeid]->distance * $activities[$i]->distance;
+			$activities[$i]->score += $weightings[$activities[$i]->typeid]->distance * (1 - $activities[$i]->distance);
 		}
 		
 		return $activities;
