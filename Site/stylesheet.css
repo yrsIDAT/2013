@@ -1,8 +1,8 @@
 /* CSS Document */
 html { width: 100%; margin: 0; height: 100%; }
 body { width: 100%; margin: 0; height: 100%; font-family: 'OpenSansRegular', sans-serif; background-color: #e2e2e2; }
-#logo { float: left; background-image: url(assets/logo.png); height: 46px; width: 199px; background-repeat: no-repeat; position: relative; background-position: 50% 50%; padding: 13px; }
-#logoresults { float: left; background-image: url(assets/logo.png); height: 46px; width: 199px; background-repeat: no-repeat; position: relative; background-position: 50% 50%; padding: 29px; }
+#logo { margin: 0 auto;  float: left; background-image: url(assets/logo.png); height: 46px; width: 199px; background-repeat: no-repeat; position: relative; background-position: 50% 50%; padding: 29px; }
+#logoresults { float: left; background-image: url(assets/logo.png); height: 46px; width: 199px; background-repeat: no-repeat; position: relative; background-position: 50% 50%; padding: 13px; }
 #searchcontainer { position: absolute; height: 100%; display: table; width: 100%; top: 0; text-align: center; }
 #search { width: 540px; margin: 0 auto; display: table-cell; vertical-align: middle; }
 #searchbox { font-size: 40px; font-family: 'OpenSansLight', sans-serif; color: #fff; }
@@ -26,10 +26,11 @@ color: #fff;
 a { color: #fff; }
 #head { overflow: auto; background-color: #1d7eb2; }
 .searchresult { font-family: 'OpenSansRegular'-webkit-body; border: none; border-bottom: 4px solid #fff; background: transparent; width: 50%; max-width: 450px; height: 28px; font-size: 28px; color: #fff; padding-bottom: 5px; }
-.resultform { width: 926px; font-family: 'OpenSansLight', sans-serif; font-size: 28px; color: #fff; margin: 0 auto; padding: 15px; }
+.resultform { width: 701px; font-family: 'OpenSansLight', sans-serif; font-size: 28px; color: #fff; margin: 0 auto; padding: 15px; }
 .submitresult { background-color: transparent; border: none; background-image: url(assets/arrow.png); width: 35px; height: 35px; position: relative; top: 7px; left: -7px; border-bottom: 4px solid #fff; cursor: pointer; background-size: 90%; background-repeat: no-repeat; background-position: 50% 50%; }
 .searchresult:focus, .homeresult:focus { outline: none; }
 #resultscontainer { margin: 0 auto; min-height: 500px; overflow: auto; text-align: center; }
 #resultscontainer ul { list-style: none; display: inline-block; }
-.card { width: 350px; height: 400px; background-color: #fff; border: 1px solid #c0c0c0; float: left; margin: 20px; }
+.card { width: 350px; height: 400px; background-color: #fff; border: 1px solid #c0c0c0; float: left; margin: 20px; -webkit-transition: 1s;}
 .resultmessage { font-family: 'OpenSansLight', sans-serif; color: #000; font-size: 26px; margin: 20px 0px 0px 0px; text-align: left;}
+#iwantresults {float:left; }
