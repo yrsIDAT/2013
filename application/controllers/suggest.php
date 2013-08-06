@@ -13,10 +13,10 @@ class Suggest extends CI_Controller {
 	{
 
 		$data['title'] = 'Thinking of something...'; // Capitalize the first letter
-		$data['suggestion'] = $this->suggest_model->makeSuggestion('plymouth',50.371389, -4.142222);
-		$this->load->view('templates/header', $data);
-		$this->load->view('suggest/basic', $data);
-		$this->load->view('templates/footer', $data);
+		$data['suggestions'] = $this->suggest_model->makeSuggestion('plymouth',50.371389, -4.142222);
+		$this->load->view('suggest/header', $data);
+		$this->load->view('suggest/results', $data);
+		$this->load->view('suggest/footer', $data);
 
 	}
 }

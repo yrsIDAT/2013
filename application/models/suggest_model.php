@@ -44,6 +44,15 @@ class Suggest_model extends CI_Model {
 			}
 		endforeach;
 
+ 		// sort them
+		usort($suggestions, function($a, $b) {
+		    if( $a['distance_adjusted'] > $b['distance_adjusted']) {
+		    	return 1;
+		    } else {
+		    	return 0;
+		    }
+		});
+
 		return $suggestions;
 	}
 

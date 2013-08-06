@@ -45,7 +45,7 @@ $route['suggest'] = 'suggest/test';
 $route['news/(:any)'] = 'news/view/$1';
 $route['news'] = 'news';
 
-//$route['(:any)'] = 'pages/view/$1';
+$route['(:any)'] = 'pages/view/$1';
 
 $route['404_override'] = '';
 
