@@ -25,15 +25,30 @@ color: #fff;
 #help { z-index: 99; text-align: right; position: relative; padding: 10px }
 a { color: #fff; }
 #head { overflow: auto; background-color: #1d7eb2; }
-.searchresult { font-family: 'OpenSansRegular'-webkit-body; border: none; border-bottom: 4px solid #fff; background: transparent; width: 50%; max-width: 450px; height: 28px; font-size: 28px; color: #fff; padding-bottom: 5px; }
-.resultform { width: 701px; font-family: 'OpenSansLight', sans-serif; font-size: 28px; color: #fff; margin: 0 auto; padding: 15px; }
-.submitresult { background-color: transparent; border: none; background-image: url(assets/arrow.png); width: 35px; height: 35px; position: relative; top: 7px; left: -7px; border-bottom: 4px solid #fff; cursor: pointer; background-size: 90%; background-repeat: no-repeat; background-position: 50% 50%; }
-.searchresult:focus, .homeresult:focus { outline: none; }
+.searchresult {-webkit-border-radius: 0;display: inline-block;vertical-align:middle; font-family: 'OpenSansRegular'-webkit-body; border: none; border-bottom: 4px solid #fff; background: transparent; width: 50%; max-width: 450px; height: 28px; font-size: 28px; color: #fff; padding-bottom: 5px; }
+.resultform { width: 701px; font-family: 'OpenSansLight', sans-serif; font-size: 0; color: #fff; margin: 0 auto; padding: 15px; text-align:center;}
+.submitresult {
+background-color: transparent;
+-webkit-border-radius: 0;
+background-image: url(assets/arrow.png);
+width: 35px;
+height: 35px;
+position: relative;
+left: 0px;
+padding-top: 32px;
+border-bottom: 4px solid #fff;
+cursor: pointer;
+border-radius: none;
+background-size: 90%;
+background-repeat: no-repeat;
+background-position: 50% 50%;
+display: inline-block;vertical-align:middle;
+}.searchresult:focus, .homeresult:focus { outline: none; }
 #resultscontainer { margin: 0 auto; min-height: 500px; overflow: auto; text-align: center; }
 #resultscontainer ul { list-style: none; display: inline-block; }
 .card { width: 350px; height: 400px; background-color: #fff; border: 1px solid #c0c0c0; float: left; margin: 20px; -webkit-transition: 1s;}
 .resultmessage { font-family: 'OpenSansLight', sans-serif; color: #000; font-size: 26px; margin: 20px 0px 0px 0px; text-align: left;}
-#iwantresults {float:left; }
+#iwantresults {display: inline-block;vertical-align:middle; font-size:28px; }
 .content {
 overflow: auto;
 }
