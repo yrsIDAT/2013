@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ricostacruz.com/jquery.transit/jquery.transit.min.js"> </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <link rel="stylesheet" type="text/css" href="stylesheet.css"><link rel="stylesheet" type="text/css" href="fonts/fonts.css">
 <title>Things2Do</title>
 </head>
 
-<body OnLoad="document.s.search.focus();">
+<body OnLoad="document.s.search.focus();" style="background-image: url(assets/background.png); background-size: cover; background-repeat: no-repeat;">
 <div id="logo"> </div>
-
+<a href="/help"><div id="help"> Help </div></a>
 <div id="searchcontainer">
 	<div id="search">
     	<div id="searchbox">
         	<form name="s" action="" method="get">I want to... <input name="search" type="text" placeholder="" class="homesearch" autocomplete="off" id="theFieldID">
+            <input name="submit" type="submit" value="" class="submithome">
             </form>
         </div>
 	</div>
