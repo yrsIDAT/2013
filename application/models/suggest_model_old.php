@@ -18,20 +18,32 @@ class Suggest_model extends CI_Model {
 
 		$suggestions = array();
 		$places = $this->staticPlaces($lat,$lon);
-		$b = array();
+
 		foreach($places as $place):
-			
-			$place->distance = $this->calculateDistance($lat,$lon,$place->lat,$place->lon);
-			$place->distance_adjusted = ($place->distance/1000) / $this->radius;
-			$b[] = $place;
+			// calculate score for distance
+			//ini_set('display_errors',1);
+			$place['distance'] = $this->calculateDistance($lat,$lon,$place['lat'],$place['lon']);
+			$place['distance_adjusted'] = ($place['distance']/1000) / $this->radius;
+			switch($place['type']):
+				case 1:
+					// see if its sunny enough to go to the beach
+					if($weather['condition'] == 'sun') {
+						$place['score'] = 0.4 + (0.5 * ($weather['temp'] / 30));
+					}
+					break;
+				case 2:
+					// look up a suitable film to recommend
+					$place['score'] = 0.8;
+					break;
+				default:
+					$place['score'] = 0;
+				endswitch;
+
+			if($place['score'] > 0) {
+				$suggestions[] = $place;
+			}
 		endforeach;
-		$places = $b;
 
-		$conditions = array(
-			'weather'=>$weather
-			);
-
-/*
  		// sort them
 		usort($suggestions, function($a, $b) {
 		    if( $a['distance_adjusted'] > $b['distance_adjusted']) {
@@ -39,19 +51,14 @@ class Suggest_model extends CI_Model {
 		    } else {
 		    	return 0;
 		    }
-		});*/
-
-		$suggestions = $this->calculateScores($places,$conditions);
-		echo "<pre>";
-		print_r($suggestions);
-		echo "</pre>";
+		});
 
 		return $suggestions;
 	}
 
 	private function getWeather($city) {
 		$query = $this->db->get_where('weather', array('city' => $city));
-		return $query->row_object();
+		return $query->row_array();
 	}
 
 	private function staticPlaces($lat,$lon) {
@@ -61,7 +68,7 @@ class Suggest_model extends CI_Model {
 		$this->db->where('lon >=', $bounding_box[2]);
 		$this->db->where('lon <=', $bounding_box[3]);
 		$query =$this->db->get('places');
-		$result = $query->result_object();
+		$result = $query->result_array();
 		
 		return $result;
 	}
@@ -134,50 +141,4 @@ class Suggest_model extends CI_Model {
 
 	    return array($lat1,$lat2,$lon1,$lon2);
 	}
-
-	function calculateScores($activities, $conditions)
-	{
-		$weightings = Array(
-			new Weighting(0, 0, 0),
-			new Weighting(1, 1, 0.5),
-			new Weighting(-0.5, 0, 0.5),
-			new Weighting(0.5, 1, 1),
-			new Weighting(0, 1, 0.2)
-		);
-		
-		$activitiesLength = sizeOf($activities);
-		
-		for ($i = 0; $i < $activitiesLength; $i++)
-		{
-			echo "<pre>";
-			print_r($conditions);
-			echo "</pre>";
-			$activities[$i]->score = 0;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * 1;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * $conditions->weather->temp;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * $conditions->weather->precipitation;
-			
-			$activities[$i]->score += $weightings[$activities[$i]->type]->distance * (1 - $activities[$i]->distance);
-		}
-		
-		return $activities;
-	}
 }
-
-class Weighting
-	{
-		public $condition;
-		public $temperature;
-		public $precipitation;
-		public $_time;
-		public $distance;
-		
-		function __construct($weather, $_time, $distance)
-		{
-			$this->condition = $weather / 3;
-			$this->temperature = $weather / 3;
-			$this->precipitation = -$weather / 3;
-			$this->_time = $_time;
-			$this->distance = $distance;
-		}
-	}
