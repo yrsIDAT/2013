@@ -4,6 +4,7 @@ class Suggest_model extends CI_Model {
 	public function __construct()
 	{
 		$this->load->database();
+		$this->load->library('MikeScore');
 		$this->radius = 30;
 	}
 
@@ -11,12 +12,6 @@ class Suggest_model extends CI_Model {
 	{
 		$weather = $this->getWeather($city);
 
-		// TODO: updates data for the city
-		// $this->updatePlaces($city);
-
-		// now, starts compiling list of suggested activities
-
-		$suggestions = array();
 		$places = $this->staticPlaces($lat,$lon);
 		$b = array();
 		foreach($places as $place):
@@ -26,25 +21,23 @@ class Suggest_model extends CI_Model {
 			$b[] = $place;
 		endforeach;
 		$places = $b;
-		echo serialize($weather);
-		$conditions = array(
-			'weather'=>$weather
+
+		$conditions = (object) array(
+			'weather'=>$weather,
+			'_time' => time()
 			);
 
-/*
+		// process scores
+		$suggestions = $this->mikescore->calculateScores($places,$conditions);
+
  		// sort them
 		usort($suggestions, function($a, $b) {
-		    if( $a['distance_adjusted'] > $b['distance_adjusted']) {
+		    if( $a->score > $b->score) {
 		    	return 1;
 		    } else {
 		    	return 0;
 		    }
-		});*/
-
-		$suggestions = $this->calculateScores($places,$conditions);
-		echo "<pre>";
-		print_r($suggestions);
-		echo "</pre>";
+		});
 
 		return $suggestions;
 	}
@@ -135,49 +128,4 @@ class Suggest_model extends CI_Model {
 	    return array($lat1,$lat2,$lon1,$lon2);
 	}
 
-	function calculateScores($activities, $conditions)
-	{
-		$weightings = Array(
-			new Weighting(0, 0, 0),
-			new Weighting(1, 1, 0.5),
-			new Weighting(-0.5, 0, 0.5),
-			new Weighting(0.5, 1, 1),
-			new Weighting(0, 1, 0.2)
-		);
-		
-		$activitiesLength = sizeOf($activities);
-		
-		for ($i = 0; $i < $activitiesLength; $i++)
-		{
-			echo "<pre>";
-			print_r($conditions);
-			echo "</pre>";
-			$activities[$i]->score = 0;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * 1;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * $conditions->weather->temp;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * $conditions->weather->precipitation;
-			
-			$activities[$i]->score += $weightings[$activities[$i]->type]->distance * (1 - $activities[$i]->distance);
-		}
-		
-		return $activities;
-	}
 }
-
-class Weighting
-	{
-		public $condition;
-		public $temperature;
-		public $precipitation;
-		public $_time;
-		public $distance;
-		
-		function __construct($weather, $_time, $distance)
-		{
-			$this->condition = $weather / 3;
-			$this->temperature = $weather / 3;
-			$this->precipitation = -$weather / 3;
-			$this->_time = $_time;
-			$this->distance = $distance;
-		}
-	}
