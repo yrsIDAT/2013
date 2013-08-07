@@ -3,6 +3,7 @@
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://ricostacruz.com/jquery.transit/jquery.transit.min.js"> </script>
+<!-- IE Mobile/Windows Phone 8 + IE Metro on Win 8 Responsive code, Don't touch -->
 <script> (function() {
 	if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
 		var msViewportStyle = document.createElement("style");
@@ -39,213 +40,39 @@
 	</div>
 </div>
 <div id="resultscontainer">
-	<div class="resultmessage"> We've found the following things for you to do </div>
-	<div class="content"> 
-		<!-- Results go here -->
-		<!-- Some examplesUU of cards -->
+	<div class="resultmessage"> We've found the following things for you to do </div><!-- Message here -->
+	<div id="cardcontainer" class="content"> 
+		<!-- Results go here --> 
+		<!-- Some examples of cards -->
 		<div class="card">
 			<div class="cardtop">
-				<div class="cardtext">
+				<div class="cardtext"><!-- Title Goes in H2 -->
 					<h2> Elysium </h2>
-					<div class="ptext">
+					<div class="ptext"> <!-- Text Goes here -->
 						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
 					</div>
-					<div class="shadow"> </div>
+					<div class="shadow"> </div><!-- Don't touch the shadow -->
 				</div>
 				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
-			<div class="cardbottom">
-				<div class="cardtext">
+			<div class="cardbottom"><!-- Bottom Half of card -->
+				<div class="cardtext"><!-- Text Goes here -->
 					<h2> Elysium </h2>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
 				</div>
 			</div>
-		</div>
-		<div class="card">
-			<div class="cardtop">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<div class="ptext">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-					</div>
-					<div class="shadow"> </div>
-				</div>
-				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
-			<div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div>
-		</div>
-		<div class="card">
-			<div class="cardtop">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<div class="ptext">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-					</div>
-					<div class="shadow"> </div>
-				</div>
-				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
-			<div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div>
-		</div>
-		<div class="card">
-			<div class="cardtop">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<div class="ptext">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-					</div>
-					<div class="shadow"> </div>
-				</div>
-				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
-			<div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div>
-		</div>
-		<!-- Some Examples of smaller cards -->
-		<div class="smallcard"><div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div></div>
-		<div class="smallcard"><div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div></div>
-	<div class="card">
-			<div class="cardtop">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<div class="ptext">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-					</div>
-					<div class="shadow"> </div>
-				</div>
-				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
-			<div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div>
-		</div>
-		<div class="card">
-			<div class="cardtop">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<div class="ptext">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-					</div>
-					<div class="shadow"> </div>
-				</div>
-				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
-			<div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div>
-		</div>
-			
-		<div class="card">
-			<div class="cardtop">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<div class="ptext">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-					</div>
-					<div class="shadow"> </div>
-				</div>
-				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
-			<div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div>
-		</div>
-		<div class="card">
-			<div class="cardtop">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<div class="ptext">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-					</div>
-					<div class="shadow"> </div>
-				</div>
-				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
-			<div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div>
-		</div>
+		</div> <!-- End Card -->
 		
-		<div class="card">
-			<div class="cardtop">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<div class="ptext">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-					</div>
-					<div class="shadow"> </div>
-				</div>
-				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
+		<!-- Some Examples of smaller cards -->
+		<div class="smallcard">
 			<div class="cardbottom">
-				<div class="cardtext">
+				<div class="cardtext"><!-- Text Goes here -->
 					<h2> Elysium </h2>
 					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
 				</div>
 			</div>
-		</div>
-		<div class="card">
-			<div class="cardtop">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<div class="ptext">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-					</div>
-					<div class="shadow"> </div>
-				</div>
-				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
-			<div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div>
-		</div>
-		<div class="card">
-			<div class="cardtop">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<div class="ptext">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-					</div>
-					<div class="shadow"> </div>
-				</div>
-				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
-			<div class="cardbottom">
-				<div class="cardtext">
-					<h2> Elysium </h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+		</div><!-- End Small Card -->
+		
+	</div><!--End Content/CardContainer -->
+</div><!-- End Results container -->
 </body>
 </html>
