@@ -18,21 +18,21 @@
 
 <body onload="initialise()">
 	<div id="head"> 
-    	<a href="/"><div id="logoresults"></div> </a>
-        <div id="resultssearch"> 
-          <!--Header Search Box-->
-        	<div name="rs" class="resultform"> 
+		<a href="/"><div id="logoresults"></div> </a>
+		<div id="resultssearch"> 
+			<!--Header Search Box-->
+        	<form name="resultform" class="resultform" onsubmit="sendSearch()"> 
             	<div id="iwantresults"> I want to... </div>
             	<input id="searchterm" type="text" class="searchresult"> 
-                <input id="searchsubmit" type="submit" value="" class="submitresult" onsubmit="sendSearch()">
-            </div>
+                <input id="searchsubmit" type="submit" value="" class="submitresult">
+            </form>
         </div>
     </div>
     
 	<div id="resultscontainer">
 		<div class="resultmessage"> We've found the following things for you to do </div>
-    	<div id="cardcontainer" class="content">
-        <!-- Results go here -->
+		<div id="cardcontainer" class="content">
+		<!-- Results go here -->
       	 	<div class="card">
             	<div class="cardtop"> </div>
             </div>

@@ -8,7 +8,7 @@ var resultsObj=null
 function initialise()
 {
 	getLocation()
-	
+	preventSubmit()
 }
 
 
@@ -27,6 +27,7 @@ function getLocation()
 }
 function sendSearch()
 {
+	//alert("asdsandjsn dn")
 /*
 	var sendQuery=$.trim(document.getElementById("searchterm").value)
 	if (sendQuery!=null && sendQuery!="")
@@ -73,6 +74,15 @@ function cardRemoveAll()
 	})
 	
 
+}
+
+function preventSubmit()
+{
+
+	
+	$(this).submit(function(){
+		return false
+	})
 }
 
 
