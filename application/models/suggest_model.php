@@ -4,7 +4,6 @@ class Suggest_model extends CI_Model {
 	public function __construct()
 	{
 		$this->load->database();
-		$this->fb->init_facebook();
 		$this->load->library('MikeScore');
 		$this->radius = 30;
 	}
@@ -16,18 +15,12 @@ class Suggest_model extends CI_Model {
 		$places = $this->staticPlaces($lat,$lon);
 		$b = array();
 		foreach($places as $place):
+			
 			$place->distance = $this->calculateDistance($lat,$lon,$place->lat,$place->lon);
 			$place->distance_adjusted = ($place->distance/1000) / $this->radius;
 			$b[] = $place;
 		endforeach;
 		$places = $b;
-
-		// Loads facebook profile if logged in
-		if($this->fb->user != FALSE) {
-			$uid = $this->fb->user;
-			$movie_genres = $this->getFacebookMovieGenres();
-		}
-		//print_r($movie_genres);
 
 		$conditions = (object) array(
 			'weather'=>$weather,
@@ -47,44 +40,6 @@ class Suggest_model extends CI_Model {
 		});
 
 		return $suggestions;
-	}
-
-	private function getFacebookMovieGenres() {
-		$user = $this->fb->user;
-		$this->updateFacebookProfile();
-		$query = $this->db->get_where('facebook', array('uid' => $user));
-		$row = $query->row_array();
-		return $row['movies_genres'];
-	}
-
-	private function updateFacebookProfile() {
-		$user = $this->fb->user; // get facebook id
-
-		// lookup new facebook profile
-		$fbquery = $this->fb->fql('SELECT name, movies, music  FROM user WHERE uid = me()');
-		$username = $fbquery[0]['name'];
-		$movies = $fbquery[0]['movies'];
-		$music = $fbquery[0]['music'];
-		$userdata = array(
-				'uid' => $user,
-				'name' =>$username,
-				'fetchdate' => date("Y-m-d H:i:s"),
-				'movies' => $movies,
-				'music' => $music
-				);
-		
-		$query = $this->db->get_where('facebook', array('uid' => $user));
-		$row = $query->row_array();
-
-
-		if($query->num_rows() == 0) {  // insert into DB if new
-
-			$insert = $this->db->insert('facebook',$userdata);
-		} else { // update profile
-			$update = $this->db->update('facebook',$userdata);
-		}
-
-		// process genres 
 	}
 
 	private function getWeather($city) {
