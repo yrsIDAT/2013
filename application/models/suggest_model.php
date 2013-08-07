@@ -24,7 +24,7 @@ class Suggest_model extends CI_Model {
 
 		$conditions = (object) array(
 			'weather'=>$weather,
-			'_time' => time()
+			'_time' => (float)date("G", time()) + ((float)date("i", time()))/60
 			);
 
 		// process scores
