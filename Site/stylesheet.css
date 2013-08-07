@@ -14,6 +14,13 @@ body {
 	font-family: 'OpenSansRegular', sans-serif;
 	background-color: #e2e2e2;
 }
+#home {
+	width: 100%;
+	height: 100%;
+	background-image: url(assets/background.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
 #logo {
 	margin: 0 auto;
 	float: left;
@@ -270,3 +277,61 @@ p {
 	border-radius: 5px;
 	text-align: left;
 }
+#tipbox {
+    width: 209px;
+    margin: 0 auto;
+    height: 50px;
+    background: #2F8024;
+    position: relative;
+    color: #fff;
+    font-family: 'OpenSansLight', sans-serif;
+    font-size: 21px;
+}
+#tiptri {
+    width: 50px;
+    height: 50px;
+    background: #2F8024;
+    -webkit-transform: rotate(45deg);
+    position: relative;
+    margin: 0 auto;
+    top: 25px;
+}
+@-webkit-keyframes filmtip {
+	0% { opacity: 0; }
+	1.25% { opacity: 100;  }
+	23.75% { opacity: 100; }
+	25% { opacity: 0; }
+	100% { opacity: 0; }
+	
+}
+@-webkit-keyframes placestip {
+	0% {opacity: 0; }
+	25% { opacity: 0; }
+	26.25% { opacity: 100;  }
+	48.75% { opacity: 100; }
+	50% { opacity: 0; }
+	100% { opacity: 0; }
+	
+}
+@-webkit-keyframes gametip {
+	0% {opacity: 0; }
+	50% { opacity: 0; }
+	51.25% { opacity: 100;  }
+	73.75% { opacity: 100; }
+	75% { opacity: 0; }
+	100% { opacity: 0; }
+	
+}
+@-webkit-keyframes foodtip {
+	0% {opacity: 0; }
+	75% { opacity: 0; }
+	76.25% { opacity: 100;  }
+	98.75% { opacity: 100; }
+	100% { opacity: 0; }
+	
+}
+#try { position:absolute; left: 10px; top: 10px;}
+#filmtip { position: absolute; opacity: 0;  left: 50px; top: 10px; -webkit-animation: filmtip 30s infinite linear; }
+#placestip { position: absolute; opacity: 0;  left: 50px; top: 10px; -webkit-animation: placestip  30s infinite linear; }
+#gametip { position: absolute; opacity: 0;  left: 50px; top: 10px;  -webkit-animation: gametip  30s infinite linear; }
+#foodtip {opacity: 0;  position: absolute; left: 50px; top: 10px; -webkit-animation: foodtip 30s infinite linear; }
