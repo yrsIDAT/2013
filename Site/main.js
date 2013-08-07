@@ -8,7 +8,7 @@ var resultsObj=null
 function initialise()
 {
 	getLocation()
-	
+	preventSubmit()
 }
 
 
@@ -52,6 +52,52 @@ function sendSearch()
 
 
 //Do simulations of the div adding functions and whatnot
+
+
+function cardAdd(cardData) //object=parsed JSON
+{
+	
+	var cardString="<div class=\"card\">"
+	cardString=cardString+cardData.title+"<div class=\"cardtop\">"
+	
+	
+	switch(cardData.type)
+	{
+		case TYPE_BEACH:
+	  
+			break
+		case TYPE_CINEMA:
+
+			break
+		case TYPE_CAFE:
+		
+			break
+		default:
+	  
+	}
+	cardString=cardString+"</div></div>"
+	var newCard=$(cardString)
+	$("#cardcontainer").append(newCard)
+}
+
+function cardRemoveAll()
+{
+
+	$(function(){
+	  $("div.card").remove()
+	})
+	
+
+}
+
+function preventSubmit()
+{
+
+	
+	$(this).submit(function(){
+		return false
+	})
+}
 
 
 
