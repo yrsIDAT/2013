@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '141.163.232.94:8889';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
-$db['default']['database'] = 'iambored';
+$db['default']['hostname'] = 'things2do.ws.mysql';
+$db['default']['username'] = 'things2do_ws';
+$db['default']['password'] = 'things2do_ws';
+$db['default']['database'] = 'p49BqZLf';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
