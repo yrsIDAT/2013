@@ -25,7 +25,7 @@
 	</div>
 	
     <!--Location and weather -->
-	<div id="localhome"> Weather <br> Location: <span id="loc"></span></div>
+	<div id="localhome"> Weather <br> Location: <span id="loc"></span><br>Facebook: <? if($fb_logged_in) { echo $fb_name; echo '('.$fb_uid.')'; } else { echo "<a href=\"".$fb_login_url."\">Log In</a>"; } ?></div>
 	<script type="text/javascript">
 	window.onload = function(){
     if(navigator.geolocation)

@@ -6,7 +6,7 @@ class Suggest extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('suggest_model_old');
-		//$this->fb->init_facebook();
+		$this->fb->init_facebook();
 	}
 
 

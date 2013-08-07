@@ -19,10 +19,13 @@ class Fb {
     	$this->get_fb_object();
         $url =  $this->fb_redirectUri;
     	if (!$this->have_user()){
-    		$this->redirect_user($this->login_url());
-    	}
+    		//$this->redirect_user($this->login_url());
+            $this->user = FALSE;
+            $this->login_url = $this->login_url();
+    	} else {
     	$this->user = $this->fb->getUser();
     	$this->logout_url = $this->logout_url();
+        }
     }
     public function api(){
     	return call_user_func_array( array($this->fb,'api'), func_get_args() );
