@@ -20,9 +20,9 @@ class Suggest_model_old extends CI_Model {
 		// Loads facebook profile if logged in
 		if($this->fb->user != FALSE) {
 			$uid = $this->fb->user;
-			$movie_genres = $this->getFacebookMovieGenres($uid);
+			$movie_genres = $this->getFacebookMovieGenres();
 		}
-
+print_r($movie_genres);
 		// now, starts compiling list of suggested activities
 
 		$suggestions = array();
@@ -115,10 +115,42 @@ class Suggest_model_old extends CI_Model {
 		return $weather_score;
 	}
 
-	private function getFacebookMovieGenres($user) {
-		/*$query = $this->db->get_where('facebook', array('uid' => $user));
+	private function getFacebookMovieGenres() {
+		$user = $this->fb->user;
+		$this->updateFacebookProfile();
+		$query = $this->db->get_where('facebook', array('uid' => $user));
 		$row = $query->row_array();
-		return $row['movies_genres'];*/
+		return $row['movies_genres'];
+	}
+
+	private function updateFacebookProfile() {
+		$user = $this->fb->user; // get facebook id
+
+		// lookup new facebook profile
+		$fbquery = $this->fb->fql('SELECT name, movies, music  FROM user WHERE uid = me()');
+		$username = $fbquery[0]['name'];
+		$movies = $fbquery[0]['movies'];
+		$music = $fbquery[0]['music'];
+		$userdata = array(
+				'uid' => $user,
+				'name' =>$username,
+				'fetchdate' => date("Y-m-d H:i:s"),
+				'movies' => $movies,
+				'music' => $music
+				);
+		
+		$query = $this->db->get_where('facebook', array('uid' => $user));
+		$row = $query->row_array();
+
+
+		if($query->num_rows() == 0) {  // insert into DB if new
+
+			$insert = $this->db->insert('facebook',$userdata);
+		} else { // update profile
+			$update = $this->db->update('facebook',$userdata);
+		}
+
+		// process genres 
 	}
 
 	private function calculateDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
