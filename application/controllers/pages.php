@@ -19,6 +19,7 @@ class Pages extends CI_Controller {
 			$user = $this->fb->fql('SELECT name, uid FROM user WHERE uid = me() ');
 			$data['fb_name'] = $user[0]['name'];
 			$data['fb_uid'] = $user[0]['uid'];
+			$data['fb_logout_url'] = $this->fb->logout_url;
 		}
 
 		if ( ! file_exists('application/views/pages/'.$page.'.php'))
