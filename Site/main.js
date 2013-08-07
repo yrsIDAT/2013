@@ -55,15 +55,30 @@ function sendSearch()
 
 //Do simulations of the div adding functions and whatnot
 
-function cardAdd(object) //object=parsed JSON
+function cardAdd(cardData) //object=parsed JSON
 {
-	/*
 	
-	*/
-	var newCard = $("<div class=\"card\"><div class=\"cardtop\"> </div></div>")
+	var cardString="<div class=\"card\">"
+	cardString=cardString+cardData.title+"<div class=\"cardtop\">"
 	
-	$("#cardcontainer").append(newCard)
+	
+	switch(cardData.type)
+	{
+		case TYPE_BEACH:
+	  
+			break
+		case TYPE_CINEMA:
 
+			break
+		case TYPE_CAFE:
+		
+			break
+		default:
+	  
+	}
+	cardString=cardString+"</div></div>"
+	var newCard=$(cardString)
+	$("#cardcontainer").append(newCard)
 }
 
 function cardRemoveAll()
