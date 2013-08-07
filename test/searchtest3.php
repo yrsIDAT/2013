@@ -17,34 +17,64 @@ $conditions = (object) array(
 		$weather = $conditions->weather;
 		$processed = array();
 		foreach($activities as $place):
-			$place->score = 0;
+			// calculate score for distance
+			
+			$place->distance = $this->calculateDistance($lat,$lon,$place->lat,$place->lon);
+			// calculate a score based on how far away it is
+			$place->score_factors = array();
+			$place->score_factors->distance_score = 1 - (($place->distance/1000) / $this->radius); 
 			switch($place->type):
-					case 1:
-
-						// see if its sunny enough to go to the beach
-						if($weather->condition == 'sun') {
-							$place->score = 0.4 + (0.5 * ($weather->temperature / 30));
-						}
-						break;
-					case 2:
-						// look up a suitable film to recommend
-						if($weather->condition == 'rain' || $weather->condition == 'cloud') {
-							$place->score = 0.7;
-						}
-						else 
-						{
-							$place->score = 0.2;
-						}
-						break;
-					default:
-						$place->score = 0;
-					endswitch;
-					$place->score = round((($place->score + $place->distance_adjusted) / 2),4);
-			$processed[] = $place;	
-
+				case 1: // beach
+					$place->score_factors->weather_score = getWeatherScore(TRUE,$conditions->weather);
+					break;
+				case 2: // cinema
+					// look up a suitable film to recommend
+					$place->score_factors->weather_score = getWeatherScore(FALSE,$conditions->weather);
+					break;
+				case 3: // cafe/restaurant
+					//$place->score_factors->weather_score = $this->getWeatherScore(FALSE);
+					//$place->score_factors->time_score = $this->timeScore(6,10);
+					$place->score_factors->artificial = 0.2;
+					break;
+				default:
+					$place->score = 0;
+				endswitch;
+			$place->score = array_sum($place->score_factors) / count($place->score_factors);
+			if($place->score > 0) {
+				$processed[] = $place;
+			}
 		endforeach;
 		
 		return $processed;
+	}
+
+	getWeatherScore($isOutside=TRUE,$weather) {
+		
+		// predefine first part of score based on the condition, where 1 means suitable and 0 means unsuitable
+		$outside_condition_lookup = array(
+			'sun' => 1,
+			'cloud' => 0.5,
+			'rain' => 0
+			);
+		$inside_condition_lookup = array(
+			'sun' => 0.5,
+			'cloud' => 0.5,
+			'rain' => 1
+			);
+
+		$condition_score = $precip_score = $temp_score = 0;
+		if($isOutside) {
+			$condition_score = $outside_condition_lookup[$weather['condition']];
+			$precip_score = 1 - ($weather['precipitation'] / 100);
+			$temp_score = $weather['temp'] / 30;
+		} else {
+			$condition_score = $inside_condition_lookup[$weather['condition']];
+
+			$precip_score = $weather['precipitation'] / 100;
+			$temp_score = 1 - ($weather['temp'] / 30);
+		}
+		$weather_score = ($condition_score + $precip_score + $temp_score) / 3;
+		return $weather_score;
 	}
 
 echo "<h1>Activities:</h1><pre>";

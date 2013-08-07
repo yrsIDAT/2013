@@ -4,6 +4,7 @@ class Fb {
 	private $fb_app_id = '';
 	private $fb_app_secret = '';
 	private $fb = null;
+    private $fb_redirectUri = '';
 
 	public $user;
 	public $logout_url;
@@ -16,6 +17,7 @@ class Fb {
     	$this->signedRequest();
     	$this->load_config_file();
     	$this->get_fb_object();
+        $url =  $this->fb_redirectUri;
     	if (!$this->have_user()){
     		$this->redirect_user($this->login_url());
     	}
@@ -57,6 +59,7 @@ class Fb {
     	$this->fb_app_canvas_url = $CI->config->item('fbCanvas');
     	$this->fb_app_scope = $CI->config->item('fbScope');
     	$this->fb_app_display = $CI->config->item('fbDisplay');
+        //$this->fb_redirectUri = $CI->config->item('fbRedirect');
     }
     private function get_fb_object(){
 		$this->fb = new Facebook(array(
@@ -68,9 +71,10 @@ class Fb {
     private function login_url(){
     	$params = array(
     			'scope' => $this->fb_app_scope,
-    			'redirect_uri' => $this->fb_app_canvas_url,
-    			'display' => $this->fb_app_display
+    			'redirect_uri' => $this->fb_app_canvas_url
+    			
     		);
+        //'display' => $this->fb_app_display
     	return $this->fb->getLoginUrl($params);
     }
 

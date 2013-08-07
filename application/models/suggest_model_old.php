@@ -20,7 +20,8 @@ class Suggest_model_old extends CI_Model {
 
 		$suggestions = array();
 		$places = $this->staticPlaces($lat,$lon);
-
+		echo serialize($places);
+		echo '</br>';
 		foreach($places as $place):
 			// calculate score for distance
 			
