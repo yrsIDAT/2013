@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ricostacruz.com/jquery.transit/jquery.transit.min.js"> </script>
+<!-- IE Mobile/Windows Phone 8 + IE Metro on Win 8 Responsive code, Don't touch -->
+<script> (function() {
+	if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+		var msViewportStyle = document.createElement("style");
+		msViewportStyle.appendChild(
+			document.createTextNode("@-ms-viewport{width:480px!important}")
+		);
+		document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+	}
+})();</script>
+<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/fonts.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="HandheldFriendly" content="True" />
+<link rel="stylesheet" type="text/css" media="only screen and (min-width: 1585px)" href="1585.css" />
+<link rel="stylesheet" type="text/css" media="only screen and (max-width: 1584px)" href="1193.css" />
+<link rel="stylesheet" type="text/css" media="only screen and (max-width: 1192px)" href="802.css" />
+<link rel="stylesheet" type="text/css" media="only screen and (max-width: 801px)" href="407.css" />
+<link rel="stylesheet" type="text/css" media="handheld, only screen and (max-width: 801px)" href="407.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Results Template</title>
+</head>
+
+<body onload="initialise()">
+<div id="head"> <a href="/index.html">
+	<div id="logoresults"></div>
+	</a>
+	<div id="resultssearch"> 
+		<!--Header Search Box-->
+		<form name="rs" action="" method="get" class="resultform">
+			<div id="iwantresults"> I want to... </div>
+			<input id="searchterm" type="text" class="searchresult">
+			<input id="searchsubmit" type="submit" value="" class="submitresult" onsubmit="sendSearch()">
+		</form>
+	</div>
+</div>
+<div id="resultscontainer">
+	<div class="resultmessage"> We've found the following things for you to do </div><!-- Message here -->
+	<div id="cardcontainer" class="content"> 
+		<!-- Results go here --> 
+		<!-- Some examples of cards -->
+		<div class="card">
+			<div class="cardtop">
+				<div class="cardtext"><!-- Title Goes in H2 -->
+					<h2> Elysium </h2>
+					<div class="ptext"> <!-- Text Goes here -->
+						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
+					</div>
+					<div class="shadow"> </div><!-- Don't touch the shadow -->
+				</div>
+				<img src="assets/moviepostersample.png" class="cardimage" alt="imagetest"> </div>
+			<div class="cardbottom"><!-- Bottom Half of card -->
+				<div class="cardtext"><!-- Text Goes here -->
+					<h2> Elysium </h2>
+					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
+				</div>
+			</div>
+		</div> <!-- End Card -->
+		
+		<!-- Some Examples of smaller cards -->
+		<div class="smallcard">
+			<div class="cardbottom">
+				<div class="cardtext"><!-- Text Goes here -->
+					<h2> Elysium </h2>
+					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu quam tellus. Ut scelerisque justo eget nunc congue tristique. Fusce blandit arcu neque. Donec rutrum, dui eget condimentum elementum, eros enim dapibus leo, at lobortis nisi ante vel est. Curabitur faucibus rhoncus enim eget malesuada. Aenean libero felis, rhoncus a purus a, laoreet pellentesque arcu. </p>
+				</div>
+			</div>
+		</div><!-- End Small Card -->
+		
+	</div><!--End Content/CardContainer -->
+</div><!-- End Results container -->
+</body>
+</html>
