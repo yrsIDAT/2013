@@ -11,7 +11,13 @@ function initialise()
 	preventSubmit()
 }
 
-
+function hideHome()
+{
+	//This is to be replaced with a fancier style e.g. 
+	
+	var homeScreen=$("#home")
+	homeScreen.css("display", "none")
+}
 
 function setGeoObject(object)
 {
