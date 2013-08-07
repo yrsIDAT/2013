@@ -15,7 +15,6 @@ class Suggest_model extends CI_Model {
 		$places = $this->staticPlaces($lat,$lon);
 		$b = array();
 		foreach($places as $place):
-			
 			$place->distance = $this->calculateDistance($lat,$lon,$place->lat,$place->lon);
 			$place->distance_adjusted = ($place->distance/1000) / $this->radius;
 			$b[] = $place;
