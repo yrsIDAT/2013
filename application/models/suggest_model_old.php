@@ -5,6 +5,7 @@ class Suggest_model_old extends CI_Model {
 	public function __construct()
 	{
 		$this->load->database();
+		$this->fb->init_facebook();
 		$this->radius = 30;
 		$this->weather = NULL;
 	}
@@ -15,6 +16,12 @@ class Suggest_model_old extends CI_Model {
 
 		// TODO: updates data for the city
 		// $this->updatePlaces($city);
+
+		// Loads facebook profile if logged in
+		if($this->fb->user != FALSE) {
+			$uid = $this->fb->user;
+			$movie_genres = $this->getFacebookMovieGenres($uid);
+		}
 
 		// now, starts compiling list of suggested activities
 
@@ -106,6 +113,12 @@ class Suggest_model_old extends CI_Model {
 		}
 		$weather_score = ($condition_score + $precip_score + $temp_score) / 3;
 		return $weather_score;
+	}
+
+	private function getFacebookMovieGenres($user) {
+		/*$query = $this->db->get_where('facebook', array('uid' => $user));
+		$row = $query->row_array();
+		return $row['movies_genres'];*/
 	}
 
 	private function calculateDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
