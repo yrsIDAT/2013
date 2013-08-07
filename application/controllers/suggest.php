@@ -20,4 +20,12 @@ class Suggest extends CI_Controller {
 		$this->load->view('suggest/footer', $data);
 
 	}
+
+	public function test_json() {
+		$data = $this->suggest_model_old->makeSuggestion('plymouth',50.371389, -4.142222);
+		print_r($data);
+		$this->output
+    ->set_content_type('application/json')
+    ->set_output(json_encode($data));
+	}
 }
