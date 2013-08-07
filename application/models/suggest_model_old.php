@@ -24,7 +24,7 @@ class Suggest_model_old extends CI_Model {
 		foreach($places as $place):
 			// calculate score for distance
 			
-			$place['distance'] = $this->calculateDistance($lat,$lon,$place['lat'],$place['lon']);
+			$place->distance = $this->calculateDistance($lat,$lon,$place->lat,$place->lon);
 			// calculate a score based on how far away it is
 			/*$place['score_factors'] = array();
 			$place['score_factors']['distance_score'] = 1 - (($place['distance']/1000) / $this->radius); 
@@ -76,7 +76,7 @@ class Suggest_model_old extends CI_Model {
 		$this->db->where('lon >=', $bounding_box[2]);
 		$this->db->where('lon <=', $bounding_box[3]);
 		$query =$this->db->get('places');
-		$result = $query->result_array();
+		$result = $query->result_object();
 		
 		return $result;
 	}
