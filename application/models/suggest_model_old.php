@@ -1,15 +1,17 @@
 <?php
-class Suggest_model extends CI_Model {
+ini_set('display_errors',1);
+class Suggest_model_old extends CI_Model {
 
 	public function __construct()
 	{
 		$this->load->database();
 		$this->radius = 30;
+		$this->weather = NULL;
 	}
 
 	public function makeSuggestion($city,$lat,$lon)
 	{
-		$weather = $this->getWeather($city);
+		$this->weather = $this->getWeather($city);
 
 		// TODO: updates data for the city
 		// $this->updatePlaces($city);
@@ -21,24 +23,28 @@ class Suggest_model extends CI_Model {
 
 		foreach($places as $place):
 			// calculate score for distance
-			//ini_set('display_errors',1);
+			
 			$place['distance'] = $this->calculateDistance($lat,$lon,$place['lat'],$place['lon']);
-			$place['distance_adjusted'] = ($place['distance']/1000) / $this->radius;
+			// calculate a score based on how far away it is
+			$place['score_factors'] = array();
+			$place['score_factors']['distance_score'] = 1 - (($place['distance']/1000) / $this->radius); 
 			switch($place['type']):
-				case 1:
-					// see if its sunny enough to go to the beach
-					if($weather['condition'] == 'sun') {
-						$place['score'] = 0.4 + (0.5 * ($weather['temp'] / 30));
-					}
+				case 1: // beach
+					$place['score_factors']['weather_score'] = $this->getWeatherScore();
 					break;
-				case 2:
+				case 2: // cinema
 					// look up a suitable film to recommend
-					$place['score'] = 0.8;
+					$place['score_factors']['weather_score'] = $this->getWeatherScore(FALSE);
+					break;
+				case 3: // cafe/restaurant
+					//$place['score_factors']['weather_score'] = $this->getWeatherScore(FALSE);
+					//$place['score_factors']['time_score'] = $this->timeScore(6,10);
+					$place['score_factors']['artificial'] = 0.2;
 					break;
 				default:
 					$place['score'] = 0;
 				endswitch;
-
+			$place['score'] = array_sum($place['score_factors']) / count($place['score_factors']);
 			if($place['score'] > 0) {
 				$suggestions[] = $place;
 			}
@@ -46,7 +52,7 @@ class Suggest_model extends CI_Model {
 
  		// sort them
 		usort($suggestions, function($a, $b) {
-		    if( $a['distance_adjusted'] > $b['distance_adjusted']) {
+		    if( $a['score'] < $b['score']) {
 		    	return 1;
 		    } else {
 		    	return 0;
@@ -71,6 +77,35 @@ class Suggest_model extends CI_Model {
 		$result = $query->result_array();
 		
 		return $result;
+	}
+
+	private function getWeatherScore($isOutside=TRUE) {
+		$weather = $this->weather;
+		// predefine first part of score based on the condition, where 1 means suitable and 0 means unsuitable
+		$outside_condition_lookup = array(
+			'sun' => 1,
+			'cloud' => 0.5,
+			'rain' => 0
+			);
+		$inside_condition_lookup = array(
+			'sun' => 0.5,
+			'cloud' => 0.5,
+			'rain' => 1
+			);
+
+		$condition_score = $precip_score = $temp_score = 0;
+		if($isOutside) {
+			$condition_score = $outside_condition_lookup[$weather['condition']];
+			$precip_score = 1 - ($weather['precipitation'] / 100);
+			$temp_score = $weather['temp'] / 30;
+		} else {
+			$condition_score = $inside_condition_lookup[$weather['condition']];
+
+			$precip_score = $weather['precipitation'] / 100;
+			$temp_score = 1 - ($weather['temp'] / 30);
+		}
+		$weather_score = ($condition_score + $precip_score + $temp_score) / 3;
+		return $weather_score;
 	}
 
 	private function calculateDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)

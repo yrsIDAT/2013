@@ -26,7 +26,7 @@ class Suggest_model extends CI_Model {
 			$b[] = $place;
 		endforeach;
 		$places = $b;
-
+		echo serialize($weather);
 		$conditions = array(
 			'weather'=>$weather
 			);
