@@ -27,7 +27,7 @@ function getLocation()
 }
 function sendSearch()
 {
-
+/*
 	var sendQuery=$.trim(document.getElementById("searchterm").value)
 	if (sendQuery!=null && sendQuery!="")
 	{
@@ -35,6 +35,7 @@ function sendSearch()
 		$.get(queryPage, { query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, 
 		function(data)
 		{
+			//Parse the JSON callback and add a div for every element in the object
 			resultsObj=JSON.parse(data)
 			
 			
@@ -46,12 +47,34 @@ function sendSearch()
 		})
 		
 	
-	}
+	}*/
 
 }
 
 
 //Do simulations of the div adding functions and whatnot
+
+function cardAdd(object) //object=parsed JSON
+{
+	/*
+	
+	*/
+	var newCard = $("<div class=\"card\"><div class=\"cardtop\"> </div></div>")
+	
+	$("#cardcontainer").append(newCard)
+
+}
+
+function cardRemoveAll()
+{
+
+	$(function(){
+	  $("div.card").remove()
+	})
+	
+
+}
+
 
 
 
