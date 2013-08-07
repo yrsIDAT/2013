@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'things2do.ws.mysql';
+$db['default']['hostname'] = '10.246.16.184:3306';
 $db['default']['username'] = 'things2do_ws';
 $db['default']['password'] = 'things2do_ws';
 $db['default']['database'] = 'p49BqZLf';
