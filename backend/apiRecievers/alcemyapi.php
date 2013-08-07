@@ -19,16 +19,6 @@ class AlcAPI {
         $url=$this->make_query("/calls/text/TextGetRankedKeywords", $text);
         return $this->get_json($url, Array(0=>"keywords"));
     }
-    public function get_concepts($text) {
-        // words that influenced decisions
-        $url=$this->make_query("/calls/text/TextGetRankedConcepts", $text);
-        return $this->get_json($url, Array(0=>"concepts"));
-    }
-    public function get_entities($text) {
-        // words that influenced decisions
-        $url=$this->make_query("/calls/text/TextGetRankedNamedEntities", $text);
-        return $this->get_json($url, Array(0=>"entities"));
-    }
     private function make_query($url, $text, $data=Array()) {
         $q=str_replace('&amp;', '&', http_build_query(array_merge($data, Array("apikey"=>$this->api_key, "text"=>$text, "outputMode"=>"json"))));
         return $this->url.$url."?".$q;

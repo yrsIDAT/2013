@@ -60,24 +60,34 @@ function showPosition(position)
 </head>
 <body>
 <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="get">
-<input type="text" value="<?php echo $T2D->query;?>" name="q">
+<input type="text" value="<?php echo $T2D->query;?>" name="q" style="width:350px;">
 <input type="hidden" name="lat">
 <input type="hidden" name="lon">
 <input type="submit" value="search">
 </form>
+<h2>From Your search, here is a breakdown</h2>
 <?php
-echo "<hr style='height:5px;background-color:black;'><b>Analysis</b>";
-var_dump($T2D->analysis);
-echo "<hr style='height:5px;background-color:black;'><b>Location</b>";
-var_dump($T2D->location);
-echo "<hr style='height:5px;background-color:black;'><b>Category</b>";
-var_dump($T2D->category);
-echo "<hr style='height:5px;background-color:black;'><b>Keywords</b>";
-var_dump($T2D->alc->get_keywords($T2D->query));
-echo "<hr style='height:5px;background-color:black;'><b>Concepts</b>";
-var_dump($T2D->alc->get_concepts($T2D->query));
-echo "<hr style='height:5px;background-color:black;'><b>Entities</b>";
-var_dump($T2D->alc->get_entities($T2D->query));
+if ($T2D->analysis['categories']) {
+    echo "<h3>Categories Found</h3>";
+    foreach ($T2D->analysis['categories'] as $cat=>$score) {
+        echo "<b>$cat</b> Score = $score<br>";
+    }
+}
+if ($T2D->category) {
+    if (!isset($T2D->category['unknown'])) {
+        $cat=key($T2D->category);
+        echo "<b>$cat</b> Score = ".$T2D->category[$cat]."<br>";
+    }
+}
 ?>
+<h3>Keywords (that influenced the decision)</h3>
+<?php
+foreach ($T2D->alc->get_keywords($T2D->query) as $pack) {
+    echo "<b>".$pack['text']."</b> Score = ".$pack['relevance']."<br>";
+}
+?>
+<h3>Your Location</h3>
+Latitude <?php echo $T2D->location[0]; ?><br>
+Longitude <?php echo $T2D->location[1]; ?><br>
 </body>
 </html>
