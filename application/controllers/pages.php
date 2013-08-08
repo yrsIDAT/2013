@@ -6,11 +6,16 @@ class Pages extends CI_Controller {
 	{
 		parent::__construct();
 		$this->fb->init_facebook();
+		$this->load->helper('url');
 	}
 
 
 	public function view($page = 'home')
 	{
+		if($page == 'home') {
+			header('Location: http://things2do.ws/Site2/');
+		}
+
 		if($this->fb->user == FALSE) {
 			$data['fb_logged_in'] = FALSE;
 			$data['fb_login_url'] = $this->fb->login_url;
