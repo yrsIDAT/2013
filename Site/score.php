@@ -26,15 +26,14 @@
 		for ($i = 0; $i < $activitiesLength; $i++)
 		{
 			$activities[$i]->score = 0;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * getConditionNumber($conditions->weather->type);
-			$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * standardise($conditions->weather->temperature, 30, 0);
-			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * standardise($conditions->weather->precipitation, 50, 0);
+			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * getConditionNumber($conditions->weather->type) / 10;
+			$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * standardise($conditions->weather->temperature, 30, 0) / 10;
+			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * standardise($conditions->weather->precipitation, 50, 0) / 10;
 			
-			$activities[$i]->score += $weightings[$activities[$i]->type]->distance * standardise($activities[$i]->distance, 0, 30000);
-			$activities[$i]->score += timeAppropriateness($weightings[$activities[$i]->type]->timefeel, $conditions->_time);
+			$activities[$i]->score += $weightings[$activities[$i]->type]->distance * standardise($activities[$i]->distance, 0, 30000) / 10;
+			$activities[$i]->score += timeAppropriateness($weightings[$activities[$i]->type]->timefeel, $conditions->_time) / 3;
 			$activities[$i]->score += $categories[$activities[$i]->type];
 		}
-		
 		return $activities;
 	}
 	
