@@ -26,7 +26,7 @@ class Search {
         // use alchemyapi
         $category=$alc->get_category($searchstring);
 		$this->categoryanalysis = categorytoid($analysis, $category);*/
-		$this->categoryanalysis = $this->MikeSearchStringAlgorithm($this->categoryanalysis, $searchstring);
+		//$this->categoryanalysis = $this->MikeSearchStringAlgorithm($this->categoryanalysis, $searchstring);
     }
 	
 	function categorytoid($analysis, $category)
@@ -123,6 +123,8 @@ class Search {
 			new Keyword("computer", 8, 0.8),
 			new Keyword("water", 9, 0.5),
 			new Keyword("fish", 9, 0.65),
+			new Keyword("sea", 9, 0.3),
+			new Keyword("animal", 9, 0.3),
 			new Keyword("aquarium", 9, 1),
 			new Keyword("museum", 10, 1),
 			new Keyword("old", 10, 0.5),
@@ -131,7 +133,7 @@ class Search {
 			new Keyword("teach", 10, 0.5),
 			new Keyword("learn", 10, 0.5),
 			new Keyword("education", 10, 0.5),
-			new Keyword("animal", 11, 0.7),
+			new Keyword("animal", 11, 0.8),
 			new Keyword("zoo", 11, 1),
 			new Keyword("carnivore", 11, 0.5),
 			new Keyword("herbivore", 11, 0.5),
