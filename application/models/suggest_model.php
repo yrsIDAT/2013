@@ -46,7 +46,7 @@ class Suggest_model extends CI_Model {
 		return $query->row_object();
 	}
 
-	private function staticPlaces($lat,$lon) {
+	public function staticPlaces($lat,$lon) {
 		$bounding_box = $this->getBoundingBox($lat,$lon,$this->radius);
 		$this->db->where('lat >=', $bounding_box[0]);
 		$this->db->where('lat <=', $bounding_box[1]);

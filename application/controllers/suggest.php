@@ -28,4 +28,11 @@ class Suggest extends CI_Controller {
     ->set_content_type('application/json')
     ->set_output(json_encode($data,JSON_NUMERIC_CHECK));
 	}
+
+	public function activities_feed() {
+		$data = $this->suggest_model->staticPlaces(50.371389, -4.142222);
+		$this->output
+    ->set_content_type('application/json')
+    ->set_output(json_encode($data,JSON_NUMERIC_CHECK));
+	}
 }
