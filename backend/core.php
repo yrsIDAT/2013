@@ -40,8 +40,7 @@ class things2do {
         $this->location=$this->GEOLocation->try_all_methods();
         // use alchemyapi
         $this->category=$this->alc->get_category($this->query);
+        $this->keywords=$this->alc->get_keywords($T2D->query);
     }
 }
-var_dump(new things2do());
-var_dump($key);
 ?>
