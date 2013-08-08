@@ -46,6 +46,9 @@ $route['search.json'] = 'suggest/test_json';
 $route['news/(:any)'] = 'news/view/$1';
 $route['news'] = 'news';
 
+$route['fbportal'] = 'identity/portal';
+$route['logout'] = 'identity/logout';
+
 $route['(:any)'] = 'pages/view/$1';
 
 $route['404_override'] = '';
