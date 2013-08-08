@@ -118,7 +118,7 @@ class Search {
 			new Keyword("fun", 8, 0.5),
 			new Keyword("computer", 8, 0.8),
 			new Keyword("water", 9, 0.5),
-			new Keyword("fish", 9, 0.6.5),
+			new Keyword("fish", 9, 0.65),
 			new Keyword("aquarium", 9, 1),
 			new Keyword("museum", 10, 1),
 			new Keyword("old", 10, 0.5),
