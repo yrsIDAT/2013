@@ -99,8 +99,9 @@ function sendSearch(boxid)
 						cardAdd(resultsObj[key])
 						
 					})	*/
-					
-					for (index=0;index<=resultsObj.length;index++)
+					numberofcardstoshow = resultsObj.length
+					if (numberofcardstoshow > 24) numberofcardstoshow = 24
+					for (index=0;index<=numberofcardstoshow;index++)
 					{
 						
 						cardAdd(resultsObj[index])
