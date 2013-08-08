@@ -6,27 +6,27 @@
 			new Weighting(1, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1))),//1-beach
 			new Weighting(-0.5, 0.5, Array(new TimeFeel(0, 0), new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(21, 1))),//2-cinema
 			new Weighting(0.2, 1, Array(new TimeFeel(6, -1), new TimeFeel(10, 1), new TimeFeel(11.5, 0), new TimeFeel(13, 1), new TimeFeel(16, 0), new TimeFeel(19, 1), new TimeFeel(23,-1))),//3-cafe
-			new Weighting(0.25, 0.2, Array(new TimeFeel(0, -0.5), new TimeFeel(6, -0.5), new TimeFeel(12, 0.5), new TimeFeel(21, 0.5)))//4-stadium
-			new Weighting(0, 0.5, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1)),//mall
-			new Weighting(0, 0.5, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1)),//record shop
-			new Weighting(0, 0.5, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1)),//book shop
+			new Weighting(0.25, 0.2, Array(new TimeFeel(0, -0.5), new TimeFeel(6, -0.5), new TimeFeel(12, 0.5), new TimeFeel(21, 0.5))),//4-stadium
+			new Weighting(0, 0.5, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1))),//mall
+			new Weighting(0, 0.5, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1))),//record shop
+			new Weighting(0, 0.5, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1))),//book shop
 			new Weighting(0, 0, Array(new TimeFeel(0, 0))),//video game
-			new Weighting(0, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1)),//aquarium
-			new Weighting(0, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1)),//museum
-			new Weighting(0.5, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1)),//zoo
-			new Weighting(-0.5, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(20, 1), new TimeFeel(23, -1)),//bowling
-			new Weighting(1, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1)),//water park
-			new Weighting(0, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1)),//art gallery
-			new Weighting(0.75, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1)),//theme park
-			new Weighting(1, 0.6, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(20, 1), new TimeFeel(23, -1)),//park
-			new Weighting(1, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1))///scenic point
+			new Weighting(0, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1))),//aquarium
+			new Weighting(0, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1))),//museum
+			new Weighting(0.5, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1))),//zoo
+			new Weighting(-0.5, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(20, 1), new TimeFeel(23, -1))),//bowling
+			new Weighting(1, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1))),//water park
+			new Weighting(0, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1))),//art gallery
+			new Weighting(0.75, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1))),//theme park
+			new Weighting(1, 0.6, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(20, 1), new TimeFeel(23, -1))),//park
+			new Weighting(1, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(18, 1), new TimeFeel(21, -1)))///scenic point
 		);
 		
 		$activitiesLength = sizeOf($activities);
 		for ($i = 0; $i < $activitiesLength; $i++)
 		{
 			$activities[$i]->score = 0;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * getConditionNumber($conditions->weather->condition);
+			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * getConditionNumber($conditions->weather->type);
 			$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * standardise($conditions->weather->temperature, 30, 0);
 			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * standardise($conditions->weather->precipitation, 50, 0);
 			
@@ -132,79 +132,6 @@
 			$this->temperature = $weather / 3;
 			$this->precipitation = -$weather / 3;
 			$this->timefeel = $timefeel;
-			$this->distance = $distance;
-		}
-	}
-	
-	
-	function calculateScores($activities, $conditions, $categories)
-	{
-		$weightings = Array(
-			new Weighting(0, 0, 0),
-			new Weighting(1, 1, 0.5),//beach
-			new Weighting(-0.5, 0, 0.5),//cinema
-			new Weighting(0.5, 1, 1),//cafe
-			new Weighting(0, 1, 0.2),//stadium
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0),
-			new Weighting(0, 0, 0)
-		);
-		$activitiesLength = sizeOf($activities);
-		for ($i = 0; $i < $activitiesLength; $i++)
-		{
-			$activities[$i]->score = 0;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * getConditionNumber($conditions->weather->type);
-			$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * $conditions->weather->temperature;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * $conditions->weather->precipitation;
-			
-			$activities[$i]->score += $weightings[$activities[$i]->type]->distance * (1 - $activities[$i]->distance); 
-			$activities[$i]->score += $categories[$activities[$i]->type];
-		}
-		
-		return $activities;
-	}
-	
-	function getConditionNumber($condition)
-	{
-		if ($condition == "sun")
-		{
-			return 1;
-		}
-		else if ($condition == "cloud")
-		{
-			return 0.5;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-	
-	class Weighting
-	{
-		public $condition;
-		public $temperature;
-		public $precipitation;
-		public $_time;
-		public $distance;
-		
-		function __construct($weather, $_time, $distance)
-		{
-			$this->condition = $weather / 3;
-			$this->temperature = $weather / 3;
-			$this->precipitation = -$weather / 3;
-			$this->_time = $_time;
 			$this->distance = $distance;
 		}
 	}
