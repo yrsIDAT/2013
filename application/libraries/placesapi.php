@@ -72,8 +72,37 @@
 			$scenicPoint = $this->quickCat('4bf58dd8d48988d165941735',17);
 			$all = array_merge($all,$scenicPoint);
 
-
+			$newAll = $this->getImage($all);
 			//$allPlaces = array_merge($beaches,$cinemas,$stadiums,$cafes,$malls,$recordShops,$bookShops,$videoGameShops);
+			return $newAll;
+		}
+
+		private function getImage($all) {
+			echo 'images </br>';
+
+			for($i = 0; $i <= count($all); $i++ ) {
+				$sid = $all[$i]['sourceid'];
+				//https://api.foursquare.com/v2/venues/VENUE_ID/photos
+				
+				$url = 'https://api.foursquare.com/v2/venues/' . $sid . '/photos';
+				$key = '?v=20130805&client_id='.$this->fscid.'&client_secret='. $this->fssecret;
+				$query = '';
+				$full_url = $url . $key . $query;
+
+				$json = file_get_contents($full_url);
+				$array = json_decode($json);
+				//echo "<pre>";print_r($array);echo"</pre>";
+				$images = array();
+				foreach($array->response->photos->items as $p) {
+					$images[] = $p->prefix . 'width'. '300'. $p->suffix;
+				}
+				if($array->meta->code == 200) {
+					$all[$i]['images'] = implode($images);
+				}
+				print_r($all[$i]);
+				die();
+				//echo 'images loaded ' . $i . ' / ' . count($all) . '<br>';
+			}
 			return $all;
 		}
 
@@ -89,6 +118,7 @@
 			$aplaces = array();
 			if($code == 200) {
 				foreach($array->response->venues as $place) {
+
 					$cat = $place->categories[0]->name;
 					if($cat == 'Beach') {
 						$aplace = array();
@@ -119,7 +149,9 @@
 			$code = $array->meta->code;
 			$aplaces = array();
 			if($code == 200) {
+
 				foreach($array->response->venues as $place) {
+					
 					if(isset($place->categories[0]->name)) {
 						$cat = $place->categories[0]->name;
 						if(strpos($cat,"Movie Theater") || $cat == 'Movie Theater') {
@@ -131,6 +163,9 @@
 							$aplace['lon'] = $place->location->lng;
 							$aplace['source'] = 'foursquare';
 							$aplace['sourceid'] = $place->id;
+							if(isset($place->location->postalCode)) {
+								$aplace['postcode'] = $place->location->postalCode;
+							}
 							$aplaces[] = $aplace;
 						}
 					}

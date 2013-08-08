@@ -17,7 +17,27 @@ class Suggest_model extends CI_Model {
 		foreach($places as $place):
 			$place->distance = $this->calculateDistance($lat,$lon,$place->lat,$place->lon);
 			$place->distance_adjusted = ($place->distance/1000) / $this->radius;
+			unset($place->source);
+			unset($place->expiry);
+			$place->score = NULL;
+
+			if($place->type == 2 && isset($place->postcode) && $place->postcode != "") {
+				// find movie times
+				$place->postcode = str_replace(" ","",$place->postcode);
+				$url1 = 'http://moviesapi.herokuapp.com/cinemas/find/' . $place->postcode;
+				$json = json_decode(file_get_contents($url1));
+				$cinema = $json[0];
+				if(isset($cinema->venue_id)) {
+					$url2 = 'http://moviesapi.herokuapp.com/cinemas/' .  $cinema->venue_id . '/showings';
+					$json2 = json_decode(file_get_contents($url2));
+					$place->showings = $json2;
+				}
+				
+			}
+
+
 			$b[] = $place;
+
 		endforeach;
 		$places = $b;
 
@@ -27,9 +47,9 @@ class Suggest_model extends CI_Model {
 			);*/
 
 		// process scores
-		if($genScore == TRUE) {
+		/*if($genScore == TRUE) {
 			$suggestions = $this->mikescore->calculateScores($places,$conditions);
-			// sort them
+			/ sort them
 			usort($suggestions, function($a, $b) {
 			    if( $a->score > $b->score) {
 			    	return 1;
@@ -37,19 +57,9 @@ class Suggest_model extends CI_Model {
 			    	return 0;
 			    }
 			});
-		} else {
-			$suggestions = array();
-			foreach($places as $p) {
-				unset($p->source);
-				unset($p->expiry);
+		} */
 
-				$p->score = 0;
-				$suggestions[] =$p;
-			}
-		}
- 		
-
-		return $suggestions;
+		return $b;
 	}
 
 	private function getWeather($city) {

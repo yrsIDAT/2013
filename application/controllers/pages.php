@@ -13,7 +13,7 @@ class Pages extends CI_Controller {
 	public function view($page = 'home')
 	{
 		if($page == 'home') {
-			header('Location: http://things2do.ws/Site2/');
+			header('Location: http://things2do.ws/index.html');
 		}
 
 		if($this->fb->user == FALSE) {
