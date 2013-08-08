@@ -17,7 +17,7 @@ class Search {
     // The master class
 	public $categoryanalysis;
     public function __construct($searchstring) {
-		$this->categoryanalysis = array(0, 0, 0, 0, 0, 0);
+		$this->categoryanalysis = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         /*$YQL=new YahooSQL();
         $GEOLocation=new LocationManager();
         $alc=new AlcAPI();
