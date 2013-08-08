@@ -26,15 +26,15 @@ function setGeoObject(object)
 }
 function getLocation()
 {
- if (navigator.geolocation)
+	if (navigator.geolocation)
 	{
 		navigator.geolocation.getCurrentPosition(setGeoObject)
 	}
 }
-function sendSearch()
+function sendSearch(boxid)
 {
 
-	var sendQuery=$.trim(document.getElementById("searchterm").value)
+	var sendQuery=$.trim($(boxid)).value
 	if (sendQuery!=null && sendQuery!="")
 	{
 		//Add loading page

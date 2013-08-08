@@ -31,6 +31,45 @@
 </head>
 
 <body onload="initialise()">
+
+<div id="home">
+	<div id="logo"> </div>
+	<a href="/help">
+		<div id="help"> Help </div>
+	</a>
+	<div id="searchcontainer">
+		<div id="search">
+			<div id="searchbox"> 
+				<!-- Main search box -->
+				<form name="s" action="" method="get" onsubmit="hideHome();sendSearch('homesearch')">
+					I want to...
+					<input name="search" type="text" placeholder="" class="homesearch" autocomplete="off" id="homesearch">
+					<input name="submit" type="submit" value="" class="submithome">
+				</form>
+			</div>
+			<!-- Don't touch -->
+			<div id="tip">
+				<div id="tiptri"> </div>
+				<div id="tipbox">
+					<span id="try">Try:</span> 
+					<span id="filmtip"> Watch a film </span> 
+					<span id="placestip"> Go to the beach </span> 
+					<span id="gametip"> Play a game </span> 
+					<span id="foodtip"> Eat a burger </span>
+				</div>
+			</div>
+			
+		</div><!-- End Search -->
+	</div><!-- End Search container -->
+
+	<!--Location and weather -->
+	<div id="localhome">
+	 Weather <br> Location 
+	</div>
+
+</div>
+
+
 <div id="head"> <a href="/index.html">
 	<div id="logoresults"></div>
 	</a>
