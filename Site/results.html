@@ -75,15 +75,15 @@
 	</a>
 	<div id="resultssearch"> 
 		<!--Header Search Box-->
-		<form name="rs" action="" method="get" class="resultform">
+		<form name="rs" action="" method="get" class="resultform" onsubmit="sendSearch('searchsubmit')">
 			<div id="iwantresults"> I want to... </div>
 			<input id="searchterm" type="text" class="searchresult" lang="en" x-webkit-speech>
-			<input id="searchsubmit" type="submit" value="" class="submitresult" onsubmit="sendSearch()">
+			<input id="searchsubmit" type="submit" value="" class="submitresult">
 		</form>
 	</div>
 </div>
 <div id="resultscontainer">
-	<div class="resultmessage"> We've found the following things for you to do </div><!-- Message here -->
+	<div class="resultmessage">This what we found: </div><!-- Message here -->
 	<div id="cardcontainer" class="content"> 
 		<!-- Results go here --> 
 		<!-- Some examples of cards -->

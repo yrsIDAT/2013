@@ -33,8 +33,8 @@ function getLocation()
 }
 function sendSearch(boxid)
 {
-
-	var sendQuery=$.trim($(boxid)).value
+	alert("we done searched it boss")
+	var sendQuery=$.trim($("#"+boxid)).value
 	if (sendQuery!=null && sendQuery!="")
 	{
 		//Add loading page
