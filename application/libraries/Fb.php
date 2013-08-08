@@ -5,6 +5,7 @@ class Fb {
 	private $fb_app_secret = '';
 	private $fb = null;
     private $fb_redirectUri = '';
+    private $fb_logout_redirect = '';
 
 	public $user;
 	public $logout_url;
@@ -63,6 +64,7 @@ class Fb {
     	$this->fb_app_scope = $CI->config->item('fbScope');
     	$this->fb_app_display = $CI->config->item('fbDisplay');
         //$this->fb_redirectUri = $CI->config->item('fbRedirect');
+        $this->logout_url = $CI->config->item('fbLogoutRedirect');
     }
     private function get_fb_object(){
 		$this->fb = new Facebook(array(
@@ -82,7 +84,9 @@ class Fb {
     }
 
     private function logout_url(){
-    	return $this->fb->getLogoutUrl();
+    	return $this->fb->getLogoutUrl( array(
+                'redirect_uri' => $this->fb_logout_redirect
+           ) );
     }
 
     private function have_user(){
