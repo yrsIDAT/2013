@@ -31,4 +31,5 @@ class LocationManager {
         $this->lon=$tags['longitude'];
     }
 }
+//    http://maps.googleapis.com/maps/api/geocode/json?latlng=50.3756457,-4.1410831&sensor=false
 ?>

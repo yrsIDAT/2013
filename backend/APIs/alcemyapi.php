@@ -7,7 +7,7 @@ class AlcAPI {
     private $api_key;
     public function __construct() {
         $this->url="http://access.alchemyapi.com";
-        $this->api_key="410cfc5dc59550b6d9fa62946e01379380d746ff";
+        $this->api_key=getkey('alchemy');
     }
     public function get_category($text) {
         // find the category they are looking for
