@@ -86,7 +86,7 @@ function sendSearch(boxid)
 		$.ajax({url:queryPage, data:{ query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, 
 		success:function(data,textStatus)
 			{
-				alert(textStatus)
+				
 				showLoading(false)
 				showResults(true)
 				if (data!="-1" && data!="[ ]")

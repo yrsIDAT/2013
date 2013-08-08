@@ -18,15 +18,11 @@ function cardAdd(cardData) //object=parsed JSON
 	
 	switch(cardData.type)
 	{
-		case TYPE_BEACH:
-	  
-			break
+	
 		case TYPE_CINEMA:
 
 			break
-		case TYPE_FOOD:
 		
-			break
 		default:
 		
 		cardString="<div class=\"smallcard\">"
