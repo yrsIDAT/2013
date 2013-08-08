@@ -1,5 +1,5 @@
 
-var queryPage="results.php"
+var queryPage="server.php"
 var geoObj=null
 var resultsId=null
 var resultsObj=null
