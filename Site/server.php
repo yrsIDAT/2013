@@ -1,18 +1,19 @@
 <?php
+	define("THINGS2DO", true);
+	require "backend/keystore.php";
+	require "backend/apikeys.php";
 	require "weather.php";
 	require "searchdecoder.php";
 	require "activities.php";
 	require "score.php";
 	//include "backend/APIs/geobytes.php";
 	
-	
-	
     //$location=$this->GEOLocation->try_all_methods();
 	$conditions = new Condition();
 	$conditions->_time = (float)date("G", time()) + ((float)date("i", time()))/60;
 	$conditions->position = new Position($_GET["lat"], $_GET["lon"]);
 	//get weather - $weather from weather.php, parameters (lat, lon)
-	$conditions->weather = new Weather($conditions->position->lat, $conditions->position->lon);
+	$conditions->weather = new Weather($conditions->position->lat, $conditions->position->lon, $key->getkey("metoffice"));
 	//get string category list -  $categories from searchdecoder.php, parameters (searchstring)
 	$searchstringresults = new Search($_GET["query"]);
 	$categories = $searchstringresults->categoryanalysis;
