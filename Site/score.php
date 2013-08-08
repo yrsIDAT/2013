@@ -31,7 +31,7 @@
 			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * standardise($conditions->weather->precipitation, 50, 0) / 10;
 			
 			$activities[$i]->score += $weightings[$activities[$i]->type]->distance * standardise($activities[$i]->distance, 0, 30000) / 10;
-			$activities[$i]->score += timeAppropriateness($weightings[$activities[$i]->type]->timefeel, $conditions->_time) / 3;
+			$activities[$i]->score += timeAppropriateness($weightings[$activities[$i]->type]->timefeel, $conditions->_time) / 5;
 			$activities[$i]->score += $categories[$activities[$i]->type];
 		}
 		return $activities;

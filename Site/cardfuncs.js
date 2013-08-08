@@ -15,15 +15,21 @@ function cardAdd(cardData) //object=parsed JSON
 {
 	var cardString
 	cardString="<div class=\"smallcard\">"
-	+"<div class=\"cardbottom\">"
-	+ "<div class=\"cardtext\">"
-	+ "<a target='_blank' href="+cardData.url+">"
-	+ "<h2> " + cardData.title + " </h2>"
-	+ "</a>"
-	+ "<p>Relevancy Score: " + cardData.score + "</p>"
+	if (cardData.url != "")
+	{
+		cardString =cardString+ "<a target='_blank' href="+cardData.url+">"
+	}
+	cardString=cardString+"<div class=\"cardbottom\">"
+	cardString=cardString+ "<div class=\"cardtext\">"
+	cardString=cardString+ "<h2> " + cardData.title + " </h2>"
+	if (cardData.url != "")
+	{
+		cardString=cardString+ "</a>"
+	}
+	cardString=cardString+ "<p>Relevancy Score: " + cardData.score + "</p>"
 	if (cardData.postcode != "" && cardData.postcode != null)
 	{
-		+ "<p>Postcode: " + cardData.postcode + "</p>"
+		cardString=cardString+ "<p>Postcode: " + cardData.postcode + "</p>"
 	}
 	switch(cardData.type)
 	{
@@ -31,15 +37,15 @@ function cardAdd(cardData) //object=parsed JSON
 		case TYPE_CINEMA:
 			if (cardData.showings != undefined)
 			{
-				+ "<p>Showings:</p>"
+				cardString=cardString+ "<p>Showings:</p>"
 				$.each(cardData.showings,function(index,movie)
 				{
-					+ "<p>"+movie.title+"</p>"
+					cardString=cardString+ "<p>"+movie.title+"</p>"
 					if (movie.time!=null)
 					{
 						$.each(movie.time,function(_,movietime)
 						{
-							+"<p>-"+movietime+"</p>"
+							cardString=cardString+"<p>-"+movietime+"</p>"
 						})
 					}
 				})
@@ -50,7 +56,7 @@ function cardAdd(cardData) //object=parsed JSON
 		default:
 	
 	}
-	+"</div></div></div>"
+	cardString=cardString+"</div></div></div>"
 	var newCard=$(cardString)
 	$("#cardcontainer").append(newCard)
 }

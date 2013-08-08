@@ -145,6 +145,7 @@ class Search {
 			new Keyword("bowl", 12, 0.8),
 			new Keyword("ing ball", 12, 0.7),
 			new Keyword("game", 12, 0.5),
+			new Keyword("play", 12, 0.2),
 			new Keyword("sport", 12, 0.5),
 			new Keyword("water", 13, 0.5),
 			new Keyword("park", 13, 0.5),
