@@ -121,6 +121,9 @@ color: #fff;
 a {
 	color: #fff;
 }
+.cardtext a {
+color: #000;
+}
 #head {
 	overflow: auto;
 	background-color: #1d7eb2;
