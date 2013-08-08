@@ -1,5 +1,5 @@
 
-var queryPage="server.php"
+var queryPage="/server.php"
 var geoObj=null
 var resultsId=null
 var resultsObj=null
@@ -137,4 +137,10 @@ function setResultsToHome()
 	$("#searchterm").val($("#homesearch").val())
 
 }
+$(document).ready(function(){
+inputs=$('input[type=text]')
+inputs.bind('keyup', function(e){
+    inputs.val(e.target.value)
+})
+})
 	
