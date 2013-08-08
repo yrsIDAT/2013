@@ -49,6 +49,7 @@ $route['news'] = 'news';
 
 $route['fbportal'] = 'identity/portal';
 $route['logout'] = 'identity/logout';
+$route['identity/analyse'] = 'identity/analyse';
 
 $route['datagrab'] = 'datagrab/refreshAll';
 
