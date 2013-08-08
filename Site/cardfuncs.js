@@ -21,8 +21,8 @@ function cardAdd(cardData) //object=parsed JSON
 	+ "<a target='_blank' href="+cardData.url+">"
 	+ "<h2> " + cardData.title + " </h2>"
 	+ "</a>"
-	+ "<p>Relevancy Score:" + cardData.score + "</p>"
-	if (cardData.postcode != "" && cardData.postcode != null) cardString=cardString+"<p>Postcode:" + cardData.postcode + "</p>"
+	+ "<p>Relevancy Score: " + cardData.score + "</p>"
+	if (cardData.postcode != "" && cardData.postcode != null) cardString=cardString+"<p>Postcode: " + cardData.postcode + "</p>"
 	switch(cardData.type)
 	{
 	
