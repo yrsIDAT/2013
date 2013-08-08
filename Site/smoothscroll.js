@@ -1,4 +1,16 @@
-$(document).ready(function() {
+ $(document).ready(function() {
+    form=$(document.s)
+    form.bind('submit', function(event){
+        event.preventDefault()
+        sendSearch('homesearch')
+        var $target = $('#resultsdiv'), target = this.hash
+        var targetOffset = $target.offset().top;
+        $(scrollElem).animate({scrollTop: targetOffset}, {duration:400, complete:function(){
+            hideHome()
+        }}, function() {
+            location.hash = target;
+          });
+    })
   function filterPath(string) {
   return string
     .replace(/^\//,'')
