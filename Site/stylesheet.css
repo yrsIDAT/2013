@@ -342,4 +342,4 @@ p {
 min-height: 100%;
 }
 #loading { display:block; margin: 0 auto; width: 400px; }
-#loader { background-image:url(assets/loading.gif); height: 32px; width: 32px; background-repeat:no-repeat; }
+#loader { background-image:url(assets/loading.gif); height: 32px; width: 32px; background-repeat:no-repeat; margin: 50px auto;}
