@@ -5,6 +5,7 @@ class Suggest_model extends CI_Model {
 	{
 		$this->load->database();
 		$this->load->library('MikeScore');
+		$this->load->library('quickcache');
 		$this->radius = 30;
 	}
 
@@ -25,11 +26,26 @@ class Suggest_model extends CI_Model {
 				// find movie times
 				$place->postcode = str_replace(" ","",$place->postcode);
 				$url1 = 'http://moviesapi.herokuapp.com/cinemas/find/' . $place->postcode;
-				$json = json_decode(file_get_contents($url1));
+				
+				if($this->quickcache->isCached($url1)) {
+					$json = json_decode($this->quickcache->retrieveFromCache($url1));
+				} else {
+					$contents = file_get_contents($url1);
+					$json = json_decode($contents);
+					$this->quickcache->addToCache($url1,$contents);
+				}
+				//$json = json_decode(file_get_contents($url1));
 				$cinema = $json[0];
 				if(isset($cinema->venue_id)) {
 					$url2 = 'http://moviesapi.herokuapp.com/cinemas/' .  $cinema->venue_id . '/showings';
-					$json2 = json_decode(file_get_contents($url2));
+					//$json2 = json_decode(file_get_contents($url2));
+					if($this->quickcache->isCached($url2)) {
+						$json2 = json_decode($this->quickcache->retrieveFromCache($url2));
+					} else {
+						$contents = file_get_contents($url2);
+						$json2 = json_decode($contents);
+						$this->quickcache->addToCache($url2,$contents);
+					}
 					$place->showings = $json2;
 				}
 				
