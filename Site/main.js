@@ -75,7 +75,7 @@ function sendSearch(boxid)
 		//Delete all cards and possible error
 		cardRemoveAll()
 		showError(false)
-		showResults(true)
+		showResults(false)
 		showLoading(true)
 		
 		
@@ -83,6 +83,7 @@ function sendSearch(boxid)
 		{
 			
 			showLoading(false)
+			showResults(true)
 			if (data!="-1")
 			{
 				resultsObj=data
