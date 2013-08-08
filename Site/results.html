@@ -27,7 +27,56 @@
 <link rel="stylesheet" type="text/css" media="handheld, only screen and (max-width: 801px)" href="407.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv = 'Content-Language' content = 'en'/>
+<script> $(document).ready(function() {
+  function filterPath(string) {
+  return string
+    .replace(/^\//,'')
+    .replace(/(index|default).[a-zA-Z]{3,4}$/,'')
+    .replace(/\/$/,'');
+  }
+  var locationPath = filterPath(location.pathname);
+  var scrollElem = scrollableElement('html', 'body');
+ 
+  $('a[href*=#]').each(function() {
+    var thisPath = filterPath(this.pathname) || locationPath;
+    if (  locationPath == thisPath
+    && (location.hostname == this.hostname || !this.hostname)
+    && this.hash.replace(/#/,'') ) {
+      var $target = $(this.hash), target = this.hash;
+      if (target) {
+        var targetOffset = $target.offset().top;
+        $(this).click(function(event) {
+          event.preventDefault();
+          $(scrollElem).animate({scrollTop: targetOffset}, 400, function() {
+            location.hash = target;
+          });
+        });
+      }
+    }
+  });
+ 
+  // use the first element that is "scrollable"
+  function scrollableElement(els) {
+    for (var i = 0, argLength = arguments.length; i <argLength; i++) {
+      var el = arguments[i],
+          $scrollElement = $(el);
+      if ($scrollElement.scrollTop()> 0) {
+        return el;
+      } else {
+        $scrollElement.scrollTop(1);
+        var isScrollable = $scrollElement.scrollTop()> 0;
+        $scrollElement.scrollTop(0);
+        if (isScrollable) {
+          return el;
+        }
+      }
+    }
+    return [];
+  }
+ 
+});</script>
 <title>Results Template</title>
+
 </head>
 
 <body onload="initialise()">
@@ -41,12 +90,13 @@
 		<div id="search">
 			<div id="searchbox"> 
 				<!-- Main search box -->
-				<form name="s" action="" method="get" onsubmit="hideHome();sendSearch('homesearch');setResultsToHome()">
+				<form name="s" action="" method="get" onsubmit="hideHome();sendSearch('homesearch')">
 					I want to...
-					<input name="search" type="text" placeholder="" class="homesearch" autocomplete="off" id="homesearch">
+					<input name="search" type="text" placeholder="" class="homesearch" autocomplete="off" id="homesearch"  lang="en" x-webkit-speech >
 					<input name="submit" type="submit" value="" class="submithome">
 				</form>
 			</div>
+			<a href="#resultsdiv"> Link </a>
 			<!-- Don't touch -->
 			<div id="tip">
 				<div id="tiptri"> </div>
@@ -69,25 +119,21 @@
 
 </div>
 
-
+<div id="resultsdiv"> 
 <div id="head"> <a href="/index.html">
 	<div id="logoresults"></div>
 	</a>
 	<div id="resultssearch"> 
 		<!--Header Search Box-->
-		<form name="rs" action="" method="get" class="resultform" onsubmit="sendSearch('searchsubmit')">
+		<form name="rs" action="" method="get" class="resultform">
 			<div id="iwantresults"> I want to... </div>
 			<input id="searchterm" type="text" class="searchresult" lang="en" x-webkit-speech>
-			<input id="searchsubmit" type="submit" value="" class="submitresult">
+			<input id="searchsubmit" type="submit" value="" class="submitresult" onsubmit="sendSearch()">
 		</form>
 	</div>
 </div>
-<div id="errormessage" class="resultmessage" style="text-align:center;display:none;"> 404 - Sorry, we can't what you're looking for. Try the search box above.  </div><!-- Message here -->
 <div id="resultscontainer">
-	
-	<div class="resultmessage">This what we found: </div><!-- Message here -->
-	
-	
+	<div class="resultmessage"> We've found the following things for you to do </div><!-- Message here -->
 	<div id="cardcontainer" class="content"> 
 		<!-- Results go here --> 
 		<!-- Some examples of cards -->
@@ -121,5 +167,6 @@
 		
 	</div><!--End Content/CardContainer -->
 </div><!-- End Results container -->
+</div><!-- End of resultsdiv -->
 </body>
 </html>

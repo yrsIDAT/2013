@@ -338,3 +338,6 @@ p {
 #placestip { position: absolute; opacity: 0;  left: 50px; top: 10px; -webkit-animation: placestip  30s infinite linear; }
 #gametip { position: absolute; opacity: 0;  left: 50px; top: 10px;  -webkit-animation: gametip  30s infinite linear; }
 #foodtip {opacity: 0;  position: absolute; left: 50px; top: 10px; -webkit-animation: foodtip 30s infinite linear; }
+#resultsdiv {
+min-height: 100%;
+}
