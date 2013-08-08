@@ -5,6 +5,7 @@
 <script src="http://ricostacruz.com/jquery.transit/jquery.transit.min.js"> </script>
 <script src="types.js"></script>
 <script src="main.js"></script>
+<script src="smoothscroll.js"></script>
 
 <!-- IE Mobile/Windows Phone 8 + IE Metro on Win 8 Responsive code, Don't touch -->
 <script> (function() {
@@ -27,54 +28,7 @@
 <link rel="stylesheet" type="text/css" media="handheld, only screen and (max-width: 801px)" href="407.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv = 'Content-Language' content = 'en'/>
-<script> $(document).ready(function() {
-  function filterPath(string) {
-  return string
-    .replace(/^\//,'')
-    .replace(/(index|default).[a-zA-Z]{3,4}$/,'')
-    .replace(/\/$/,'');
-  }
-  var locationPath = filterPath(location.pathname);
-  var scrollElem = scrollableElement('html', 'body');
- 
-  $('a[href*=#]').each(function() {
-    var thisPath = filterPath(this.pathname) || locationPath;
-    if (  locationPath == thisPath
-    && (location.hostname == this.hostname || !this.hostname)
-    && this.hash.replace(/#/,'') ) {
-      var $target = $(this.hash), target = this.hash;
-      if (target) {
-        var targetOffset = $target.offset().top;
-        $(this).click(function(event) {
-          event.preventDefault();
-          $(scrollElem).animate({scrollTop: targetOffset}, 400, function() {
-            location.hash = target;
-          });
-        });
-      }
-    }
-  });
- 
-  // use the first element that is "scrollable"
-  function scrollableElement(els) {
-    for (var i = 0, argLength = arguments.length; i <argLength; i++) {
-      var el = arguments[i],
-          $scrollElement = $(el);
-      if ($scrollElement.scrollTop()> 0) {
-        return el;
-      } else {
-        $scrollElement.scrollTop(1);
-        var isScrollable = $scrollElement.scrollTop()> 0;
-        $scrollElement.scrollTop(0);
-        if (isScrollable) {
-          return el;
-        }
-      }
-    }
-    return [];
-  }
- 
-});</script>
+
 <title>Things2Do</title>
 
 </head>
@@ -90,13 +44,13 @@
 		<div id="search">
 			<div id="searchbox"> 
 				<!-- Main search box -->
-				<form name="s" action="" method="get" onsubmit="hideHome();sendSearch('homesearch')">
+				<form name="s" action="" method="get" href="#resultsdiv" onsubmit="sendSearch('homesearch')">
 					I want to...
 					<input name="search" type="text" placeholder="" class="homesearch" autocomplete="off" id="homesearch"  lang="en" x-webkit-speech >
 					<input name="submit" type="submit" value="" class="submithome">
 				</form>
 			</div>
-			<a href="#resultsdiv"> Link </a>
+			
 			<!-- Don't touch -->
 			<div id="tip">
 				<div id="tiptri"> </div>
