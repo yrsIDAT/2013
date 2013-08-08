@@ -8,18 +8,25 @@ var resultsObj=null
 function initialise()
 {
 	getLocation()
-	preventSubmit()
+    hideResults()
 }
 
 function hideHome()
 {
 	//This is to be replaced with a fancier style e.g. 
 	
-	//var homeScreen=$("#home")
-	//homeScreen.css("display", "none")
+	var homeScreen=$("#home")
+	homeScreen.css("display", "none")
 
 }
 
+function hideResults()
+{
+	//This is to be replaced with a fancier style e.g. 
+	
+	$("#resultsdiv").hide()
+
+}
 function setGeoObject(object)
 {
 	geoObj=object
@@ -97,6 +104,11 @@ function sendSearch(boxid)
 		
 	
 	}
+    else
+    {
+        return -1; // no search query entered
+    }
+    
 
 }
 
@@ -150,14 +162,6 @@ function cardRemoveAll()
 
 }
 
-function preventSubmit()
-{
-
-	
-	$(this).submit(function(){
-		return false
-	})
-}
 
 
 function setResultsToHome()
@@ -165,10 +169,3 @@ function setResultsToHome()
 	$("#searchterm").val($("#homesearch").val())
 
 }
-$(document).ready(function(){
-inputs=$('input[type=text]')
-inputs.bind('keyup', function(e){
-    inputs.val(e.target.value)
-})
-})
-	
