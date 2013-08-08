@@ -81,7 +81,7 @@ function sendSearch(boxid)
 		
 		$.get(queryPage, { query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, function(data)
 		{
-			alert("CALLBACK")
+			
 			showLoading(false)
 			if (data!="-1")
 			{
@@ -126,37 +126,12 @@ function showLoading(show)
 	}
 }
 
-function cardAdd(cardData) //object=parsed JSON
-{
-	
-	var cardString="<div class=\"card\">"
-	cardString=cardString+cardData.title+"<div class=\"cardtop\">"
-	
-	
-	switch(cardData.type)
-	{
-		case TYPE_BEACH:
-	  
-			break
-		case TYPE_CINEMA:
-
-			break
-		case TYPE_CAFE:
-		
-			break
-		default:
-	  
-	}
-	cardString=cardString+"</div></div>"
-	var newCard=$(cardString)
-	$("#cardcontainer").append(newCard)
-}
-
 function cardRemoveAll()
 {
 
 	$(function(){
 	  $("div.card").remove()
+	  $("div.smallcard").remove()
 	})
 	
 
