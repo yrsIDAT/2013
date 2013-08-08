@@ -31,22 +31,45 @@ function getLocation()
 		navigator.geolocation.getCurrentPosition(setGeoObject)
 	}
 }
+
+function showError(show)
+{
+	var errorMessage=$("#errormessage")
+	var resultsBox=$("#resultscontainer")
+	if (show)
+	{
+		resultsBox.css("display", "none")
+		errorMessage.css("display", "block")
+	}else{
+		resultsBox.css("display", "block")
+		errorMessage.css("display", "none")
+	}
+}
+
 function sendSearch(boxid)
 {
-	alert("we done searched it boss")
+	
 	var sendQuery=$.trim($("#"+boxid)).value
 	if (sendQuery!=null && sendQuery!="")
 	{
+		//Delete all cards and possible error
+		cardRemoveAll()
+		showErrorMessage(false)
 		//Add loading page
 		$.get(queryPage, { query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, 
 		function(data)
 		{
-			resultsObj=JSON.parse(data)
-			
-			
-			Object.keys(resultsObj).forEach(function(key) {
-				console.log(key, resultsObj[key]);
-			})							
+			if (data!="-1")
+			{
+				resultsObj=JSON.parse(data)
+				
+				
+				Object.keys(resultsObj).forEach(function(key) {
+					console.log(key, resultsObj[key]);
+				})		
+			}else{
+				showErrorMessage(true)
+			}
 						
 			
 		})
