@@ -83,28 +83,36 @@ function sendSearch(boxid)
 		showLoading(true)
 		
 		
-		$.get(queryPage, { query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, function(data)
-		{
-			
-			showLoading(false)
-			showResults(true)
-			if (data!="-1")
+		$.ajax({url:queryPage, data:{ query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, 
+		success:function(data,textStatus)
 			{
-				resultsObj=data
-				
-				
-				Object.keys(resultsObj).forEach(function(key) {
-					//Here you will need to add a card for each result...
-					cardAdd(resultsObj[key])
+				alert(textStatus)
+				showLoading(false)
+				showResults(true)
+				if (data!="-1" && data!="[ ]")
+				{
+					resultsObj=data
 					
-				})		
-			}else{
+					
+					Object.keys(resultsObj).forEach(function(key) {
+						//Here you will need to add a card for each result...
+						cardAdd(resultsObj[key])
+						
+					})		
+				}else{
+					showError(true)
+					showResults(false)
+					showLoading(false)
+				}
+							
+				
+			},error:function()
+			{
 				showError(true)
 				showResults(false)
-				
+				showLoading(false)
 			}
-						
-			
+			,timeout:10000
 		})
 		
 	

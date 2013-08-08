@@ -14,10 +14,7 @@
 function cardAdd(cardData) //object=parsed JSON
 {
 	
-	var cardString="<div class=\"smallcard\">"
-	cardString=cardString+cardData.title+"<div class=\"cardbottom\">"
-	+ "<div class=\"cardtext\">"
-	
+	var cardString
 	
 	switch(cardData.type)
 	{
@@ -31,9 +28,17 @@ function cardAdd(cardData) //object=parsed JSON
 		
 			break
 		default:
-	  
+		
+		cardString="<div class=\"smallcard\">"
+		+"<div class=\"cardbottom\">"
+		+ "<div class=\"cardtext\">"
+		+ "<a href="+cardData.url+">"
+		+ "<h2> " + cardData.title + " </h2>"
+		+ "</a>"
+		+ "<p>Relevancy Score:" + cardData.score + "</p>"
+		
 	}
-	cardString=cardString+"</div></div>"
+	+"</div></div></div>"
 	var newCard=$(cardString)
 	$("#cardcontainer").append(newCard)
 }
