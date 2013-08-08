@@ -38,6 +38,10 @@ function getLocation()
 	{
 		navigator.geolocation.getCurrentPosition(setGeoObject)
 	}
+    else
+    {
+        geoObj={coords:{latitude:"",longitude:""}}
+    }
 }
 
 function showResults(show)
