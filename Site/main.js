@@ -49,12 +49,12 @@ function showError(show)
 function sendSearch(boxid)
 {
 	
-	var sendQuery=$.trim($("#"+boxid)).value
+	var sendQuery=$.trim($("#"+boxid).val())
 	if (sendQuery!=null && sendQuery!="")
 	{
 		//Delete all cards and possible error
 		cardRemoveAll()
-		showErrorMessage(false)
+		showError(false)
 		//Add loading page
 		$.get(queryPage, { query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, 
 		function(data)
@@ -65,10 +65,12 @@ function sendSearch(boxid)
 				
 				
 				Object.keys(resultsObj).forEach(function(key) {
+					//Here you will need to add a card for each result...
+					cardAdd(resultsObj[key])
 					console.log(key, resultsObj[key]);
 				})		
 			}else{
-				showErrorMessage(true)
+				showError(true)
 			}
 						
 			
@@ -129,5 +131,9 @@ function preventSubmit()
 }
 
 
+function setResultsToHome()
+{
+	$("#searchterm").val($("#homesearch").val())
 
+}
 	
