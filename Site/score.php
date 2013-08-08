@@ -5,8 +5,22 @@
 			new Weighting(0, 0, 0),
 			new Weighting(1, 1, 0.5),//beach
 			new Weighting(-0.5, 0, 0.5),//cinema
-			new Weighting(0.5, 1, 1),//stadium
-			new Weighting(0, 1, 0.2)//cafe
+			new Weighting(0.5, 1, 1),//cafe
+			new Weighting(0, 1, 0.2),//stadium
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0),
+			new Weighting(0, 0, 0)
 		);
 		$activitiesLength = sizeOf($activities);
 		for ($i = 0; $i < $activitiesLength; $i++)
