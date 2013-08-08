@@ -13,7 +13,6 @@
 
 function cardAdd(cardData) //object=parsed JSON
 {
-	
 	var cardString
 	cardString="<div class=\"smallcard\">"
 	+"<div class=\"cardbottom\">"
@@ -22,24 +21,29 @@ function cardAdd(cardData) //object=parsed JSON
 	+ "<h2> " + cardData.title + " </h2>"
 	+ "</a>"
 	+ "<p>Relevancy Score: " + cardData.score + "</p>"
-	if (cardData.postcode != "" && cardData.postcode != null) cardString=cardString+"<p>Postcode: " + cardData.postcode + "</p>"
+	if (cardData.postcode != "" && cardData.postcode != null)
+	{
+		+ "<p>Postcode: " + cardData.postcode + "</p>"
+	}
 	switch(cardData.type)
 	{
 	
 		case TYPE_CINEMA:
-			
-			+ "<p>Showings:</p>"
-			$.each(cardData.showings,function(index,movie)
+			if (cardData.showings != undefined)
 			{
-				+ "<p>"+movie.title+"</p>"
-				if (movie.time!=null)
+				+ "<p>Showings:</p>"
+				$.each(cardData.showings,function(index,movie)
 				{
-					$.each(movie.time,function(_,movietime)
+					+ "<p>"+movie.title+"</p>"
+					if (movie.time!=null)
 					{
-						+"<p>-"+movietime+"</p>"
-					})
-				}
-			})
+						$.each(movie.time,function(_,movietime)
+						{
+							+"<p>-"+movietime+"</p>"
+						})
+					}
+				})
+			}
 			
 			break
 			

@@ -93,17 +93,10 @@ function sendSearch(boxid)
 				{
 					resultsObj=data
 					
-					
-					/*Object.keys(resultsObj).forEach(function(key) {
-						//Here you will need to add a card for each result...
-						cardAdd(resultsObj[key])
-						
-					})	*/
-					numberofcardstoshow = resultsObj.length
+					var numberofcardstoshow = resultsObj.length
 					if (numberofcardstoshow > 24) numberofcardstoshow = 24
 					for (index=0;index<numberofcardstoshow;index++)
 					{
-						
 						cardAdd(resultsObj[index])
 					}
 				}else{
@@ -119,7 +112,7 @@ function sendSearch(boxid)
 				showResults(false)
 				showLoading(false)
 			}
-			,timeout:15000
+			,timeout:60000
 		})
 		
 	

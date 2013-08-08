@@ -30,9 +30,10 @@
 		});
 	//return results
 	header("Content-type: text/json");
-	$reply = json_encode($activities);
+	/*$reply = json_encode($activities);
 	if ($reply == "" || $reply == null) $reply = "-1"; 
-	echo($reply);
+	echo($reply);*/
+	echo(json_encode($activities));
 /*
 	"activities":
 	[{
