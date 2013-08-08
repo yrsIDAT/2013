@@ -8,7 +8,7 @@ class Suggest_model extends CI_Model {
 		$this->radius = 30;
 	}
 
-	public function makeSuggestion($city,$lat,$lon)
+	public function makeSuggestion($city,$lat,$lon,$genScore=TRUE)
 	{
 		$weather = $this->getWeather($city);
 
@@ -27,16 +27,27 @@ class Suggest_model extends CI_Model {
 			);
 
 		// process scores
-		$suggestions = $this->mikescore->calculateScores($places,$conditions);
+		if($genScore == TRUE) {
+			$suggestions = $this->mikescore->calculateScores($places,$conditions);
+			// sort them
+			usort($suggestions, function($a, $b) {
+			    if( $a->score > $b->score) {
+			    	return 1;
+			    } else {
+			    	return 0;
+			    }
+			});
+		} else {
+			$suggestions = array();
+			foreach($places as $p) {
+				unset($p->source);
+				unset($p->expiry);
 
- 		// sort them
-		usort($suggestions, function($a, $b) {
-		    if( $a->score > $b->score) {
-		    	return 1;
-		    } else {
-		    	return 0;
-		    }
-		});
+				$p->score = 0;
+				$suggestions[] =$p;
+			}
+		}
+ 		
 
 		return $suggestions;
 	}
