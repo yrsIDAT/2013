@@ -28,7 +28,34 @@
 <link rel="stylesheet" type="text/css" media="handheld, only screen and (max-width: 801px)" href="407.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv = 'Content-Language' content = 'en'/>
-
+<script>
+$(document).ready(function(){
+    inputs=$('input[type=text]')
+    inputs.bind('keyup', function(e){
+        inputs.val(e.target.value)
+    })
+    $(document.s).bind('submit', function(event){
+        event.preventDefault()
+        if (sendSearch('homesearch')!=-1) {
+            $("#resultsdiv").show()
+             makeScroll(function(){
+                 hideHome()
+                 window.scrollTo(0)
+                 location.hash="#";
+             })
+         }
+    })
+    $(document.rs).bind('submit', function(event){
+        event.preventDefault()
+        sendSearch('homesearch')
+    })
+    $("#logoclick").bind('click', function(event){
+        event.preventDefault()
+        $("#home").show()
+        $('#resultsdiv').hide()
+    })
+})
+</script>
 <title>Things2Do</title>
 
 </head>
@@ -74,14 +101,14 @@
 </div>
 
 <div id="resultsdiv"> 
-<div id="head"> <a href="/index.html">
+<div id="head"> <a href="" id="logoclick">
 	<div id="logoresults"></div>
 	</a>
 	<div id="resultssearch"> 
 		<!--Header Search Box-->
-		<form name="rs" action="" method="get" class="resultform">
+		<form name="rs" class="resultform">
 			<div id="iwantresults"> I want to... </div>
-			<input id="searchterm" type="text" class="searchresult" lang="en" x-webkit-speech>
+			<input name="search" type="text" id="searchterm"  class="searchresult" lang="en" x-webkit-speech>
 			<input id="searchsubmit" type="submit" value="" class="submitresult" onsubmit="sendSearch()">
 		</form>
 	</div>

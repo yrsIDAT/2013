@@ -1,16 +1,4 @@
- $(document).ready(function() {
-    form=$(document.s)
-    form.bind('submit', function(event){
-        event.preventDefault()
-        sendSearch('homesearch')
-        var $target = $('#resultsdiv'), target = this.hash
-        var targetOffset = $target.offset().top;
-        $(scrollElem).animate({scrollTop: targetOffset}, {duration:400, complete:function(){
-            hideHome()
-        }}, function() {
-            location.hash = target;
-          });
-    })
+
   function filterPath(string) {
   return string
     .replace(/^\//,'')
@@ -56,5 +44,13 @@
     }
     return [];
   }
- 
-});
+  function makeScroll(complete) {
+    var $target = $('#resultsdiv'), target = this.hash
+    var targetOffset = $target.offset().top;
+    $(scrollableElement('html', 'body')).animate(
+        {scrollTop: targetOffset},
+        {duration:400, complete:complete},
+        function() {
+        location.hash = target;
+    });
+  }
