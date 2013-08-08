@@ -3,47 +3,48 @@
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://ricostacruz.com/jquery.transit/jquery.transit.min.js"> </script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv = 'Content-Language' content = 'en'/>
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 <link rel="stylesheet" type="text/css" href="fonts/fonts.css">
 <title>Things2Do</title>
 </head>
+
 <body OnLoad="document.s.search.focus();" >
-<div id="home">
-<div id="logo"> </div>
-<a href="/help">
-<div id="help"> Help </div>
-</a>
-<div id="searchcontainer">
-	<div id="search">
-		<div id="searchbox"> 
-			<!-- Main search box -->
-			<form name="s" action="" method="get">
-				I want to...
-				<input name="search" type="text" placeholder="" class="homesearch" autocomplete="off" id="theFieldID">
-				<input name="submit" type="submit" value="" class="submithome">
-			</form>
-		</div>
-		<!-- Don't touch -->
-		<div id="tip">
-			<div id="tiptri"> </div>
-			<div id="tipbox">
-				<span id="try">Try:</span> 
-				<span id="filmtip"> Watch a film </span> 
-				<span id="placestip"> Go to the beach </span> 
-				<span id="gametip"> Play a game </span> 
-				<span id="foodtip"> Eat a burger </span>
-			</div>
-		</div>
+	<div id="home">
+		<div id="logo"> </div>
+		<a href="/help">
+			<div id="help"> Help </div>
+		</a>
+		<div id="searchcontainer">
+			<div id="search">
+				<div id="searchbox"> 
+					<!-- Main search box -->
+					<form name="s" action="" method="get">
+						I want to...
+						<input name="search" type="text" placeholder="" class="homesearch" autocomplete="off" id="theFieldID" lang="en" x-webkit-speech>
+						<input name="submit" type="submit" value="" class="submithome">
+					</form>
+				</div>
+				<!-- Don't touch -->
+				<div id="tip">
+					<div id="tiptri"> </div>
+					<div id="tipbox">
+						<span id="try">Try:</span> 
+						<span id="filmtip"> Watch a film </span> 
+						<span id="placestip"> Go to the beach </span> 
+						<span id="gametip"> Play a game </span> 
+						<span id="foodtip"> Eat a burger </span>
+					</div>
+				</div>
 		
-	</div><!-- End Search -->
-</div><!-- End Search container -->
+			</div><!-- End Search -->
+		</div><!-- End Search container -->
+	
+		<!--Location and weather -->
+		<div id="localhome">
+ 			Weather <br> Location 
+		</div>
 
-<!--Location and weather -->
-<div id="localhome">
- Weather <br> Location 
-</div>
-
-</div>
+	</div>
 </body>
 </html>
