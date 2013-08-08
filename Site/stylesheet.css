@@ -281,7 +281,7 @@ p {
 	text-align: left;
 }
 #tipbox {
-    width: 209px;
+    width: 175px;
     margin: 0 auto;
     height: 50px;
     background: #248079;
@@ -289,6 +289,8 @@ p {
     color: #fff;
     font-family: 'OpenSansLight', sans-serif;
     font-size: 21px;
+	-webkit-animation: tipbox 30s infinite linear;
+	overflow:hidden;
 }
 #tiptri {
     width: 50px;
@@ -298,6 +300,17 @@ p {
     position: relative;
     margin: 0 auto;
     top: 25px;
+}
+@-webkit-keyframes tipbox {
+	0% {width: 175px; }
+	23.75% {width: 175px; }
+	25% { width: 210px; }
+	48.75% {width: 210px; }
+	50% {width: 170px; }
+	73.75% {width: 170px; }
+	75% {width: 175px; }
+	98.75% {width: 175px;}
+	100% {width: 175px; }
 }
 @-webkit-keyframes filmtip {
 	0% { opacity: 0; }
@@ -341,5 +354,6 @@ p {
 #resultsdiv {
 min-height: 100%;
 }
+#tipbox span {white-space:nowrap;}
 #loading { display:block; margin: 0 auto; width: 400px; }
 #loader { background-image:url(assets/loading.gif); height: 32px; width: 32px; background-repeat:no-repeat; margin: 50px auto;}
