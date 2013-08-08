@@ -8,25 +8,18 @@ var resultsObj=null
 function initialise()
 {
 	getLocation()
-    hideResults()
+	preventSubmit()
 }
 
 function hideHome()
 {
 	//This is to be replaced with a fancier style e.g. 
 	
-	var homeScreen=$("#home")
-	homeScreen.css("display", "none")
+	//var homeScreen=$("#home")
+	//homeScreen.css("display", "none")
 
 }
 
-function hideResults()
-{
-	//This is to be replaced with a fancier style e.g. 
-	
-	$("#resultsdiv").hide()
-
-}
 function setGeoObject(object)
 {
 	geoObj=object
@@ -40,32 +33,49 @@ function getLocation()
 	}
 }
 
-function showError(show)
+function showResults(show)
 {
-	var errorMessage=$("#errormessage")
 	var resultsBox=$("#resultscontainer")
 	if (show)
 	{
+	
 		resultsBox.css("display", "none")
-		errorMessage.css("display", "block")
 	}else{
 		resultsBox.css("display", "block")
+	}
+
+}
+
+function showError(show)
+{
+	var errorMessage=$("#errormessage")
+	
+	if (show)
+	{
+		errorMessage.css("display", "block")
+	}else{
+		
 		errorMessage.css("display", "none")
 	}
 }
 
 function sendSearch(boxid)
 {
+	
 	var sendQuery=$.trim($("#"+boxid).val())
 	if (sendQuery!=null && sendQuery!="")
 	{
 		//Delete all cards and possible error
 		cardRemoveAll()
 		showError(false)
-		//Add loading page
-		$.get(queryPage, { query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, 
-		function(data)
+		showResults(true)
+		showLoading(true)
+		console.log(':(')
+		
+		$.get(queryPage, { query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, function(data)
 		{
+			alert("CALLBACK")
+			showLoading(false)
 			if (data!="-1")
 			{
 				resultsObj=JSON.parse(data)
@@ -78,6 +88,8 @@ function sendSearch(boxid)
 				})		
 			}else{
 				showError(true)
+				showResults(false)
+				
 			}
 						
 			
@@ -85,16 +97,22 @@ function sendSearch(boxid)
 		
 	
 	}
-    else
-    {
-        return -1; // no search query entered
-    }
 
 }
 
 
 //Do simulations of the div adding functions and whatnot
 
+function showLoading(show)
+{
+	var loadGif=$("#loading")
+	if (show) 
+	{
+		loadGif.css("display", "block")
+	}else{
+		loadGif.css("display", "none")
+	}
+}
 
 function cardAdd(cardData) //object=parsed JSON
 {
@@ -132,6 +150,14 @@ function cardRemoveAll()
 
 }
 
+function preventSubmit()
+{
+
+	
+	$(this).submit(function(){
+		return false
+	})
+}
 
 
 function setResultsToHome()
@@ -139,3 +165,10 @@ function setResultsToHome()
 	$("#searchterm").val($("#homesearch").val())
 
 }
+$(document).ready(function(){
+inputs=$('input[type=text]')
+inputs.bind('keyup', function(e){
+    inputs.val(e.target.value)
+})
+})
+	
