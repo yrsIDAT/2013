@@ -85,7 +85,7 @@ function sendSearch(boxid)
 			showLoading(false)
 			if (data!="-1")
 			{
-				resultsObj=JSON.parse(data)
+				resultsObj=data
 				
 				
 				Object.keys(resultsObj).forEach(function(key) {
