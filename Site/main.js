@@ -89,10 +89,9 @@ function sendSearch(boxid)
 				
 				showLoading(false)
 				showResults(true)
-				if (data!="-1" && data!="[ ]")
+				resultsObj=data
+				if (data!="-1" && data!="[ ]" && resultsObj === Object(resultsObj))
 				{
-					resultsObj=data
-					
 					var numberofcardstoshow = resultsObj.length
 					if (numberofcardstoshow > 24) numberofcardstoshow = 24
 					for (index=0;index<numberofcardstoshow;index++)
