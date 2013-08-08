@@ -43,7 +43,7 @@ function getLocation()
 function showResults(show)
 {
 	var resultsBox=$("#resultscontainer")
-	if (show)
+	if (!show)
 	{
 	
 		resultsBox.css("display", "none")
@@ -77,7 +77,7 @@ function sendSearch(boxid)
 		showError(false)
 		showResults(true)
 		showLoading(true)
-		console.log(':(')
+		
 		
 		$.get(queryPage, { query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, function(data)
 		{
@@ -91,7 +91,7 @@ function sendSearch(boxid)
 				Object.keys(resultsObj).forEach(function(key) {
 					//Here you will need to add a card for each result...
 					cardAdd(resultsObj[key])
-					console.log(key, resultsObj[key]);
+					
 				})		
 			}else{
 				showError(true)
@@ -106,7 +106,7 @@ function sendSearch(boxid)
 	}
     else
     {
-        return -1; // no search query entered
+        return -1 // no search query entered
     }
     
 
