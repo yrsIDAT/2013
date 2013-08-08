@@ -10,7 +10,7 @@ class Suggest_model extends CI_Model {
 
 	public function makeSuggestion($city,$lat,$lon,$genScore=TRUE)
 	{
-		$weather = $this->getWeather($city);
+		//$weather = $this->getWeather($city);
 
 		$places = $this->staticPlaces($lat,$lon);
 		$b = array();
@@ -21,10 +21,10 @@ class Suggest_model extends CI_Model {
 		endforeach;
 		$places = $b;
 
-		$conditions = (object) array(
+		/*$conditions = (object) array(
 			'weather'=>$weather,
 			'_time' => (float)date("G", time()) + ((float)date("i", time()))/60
-			);
+			);*/
 
 		// process scores
 		if($genScore == TRUE) {

@@ -30,7 +30,7 @@ class Suggest extends CI_Controller {
 	}
 
 	public function activities_feed() {
-		$data = $this->suggest_model->makeSuggestion('plymouth',50.371389, -4.142222,FALSE);
+		$data = $this->suggest_model->makeSuggestion('',$_GET['lat'], $_GET['lon'],FALSE);
 		$this->output
     ->set_content_type('application/json')
     ->set_output(json_encode($data,JSON_NUMERIC_CHECK));
