@@ -15,24 +15,36 @@ function cardAdd(cardData) //object=parsed JSON
 {
 	
 	var cardString
-	
+	cardString="<div class=\"smallcard\">"
+	+"<div class=\"cardbottom\">"
+	+ "<div class=\"cardtext\">"
+	+ "<a target='_blank' href="+cardData.url+">"
+	+ "<h2> " + cardData.title + " </h2>"
+	+ "</a>"
+	+ "<p>Relevancy Score:" + cardData.score + "</p>"
+	+ "<p>Postcode:" + cardData.postcode + "</p>"
 	switch(cardData.type)
 	{
 	
 		case TYPE_CINEMA:
-
+			
+			+ "<p>Showings:</p>"
+			$.each(cardData.showings,function(index,movie)
+			{
+				+ "<p>"+movie.title+"</p>"
+				if (movie.time!=null)
+				{
+					$.each(movie.time,function(_,movietime)
+					{
+						+"<p>-"+movietime+"</p>"
+					})
+				}
+			})
+			
 			break
-		
+			
 		default:
-		
-		cardString="<div class=\"smallcard\">"
-		+"<div class=\"cardbottom\">"
-		+ "<div class=\"cardtext\">"
-		+ "<a href="+cardData.url+">"
-		+ "<h2> " + cardData.title + " </h2>"
-		+ "</a>"
-		+ "<p>Relevancy Score:" + cardData.score + "</p>"
-		
+	
 	}
 	+"</div></div></div>"
 	var newCard=$(cardString)

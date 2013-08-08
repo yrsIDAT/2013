@@ -94,11 +94,17 @@ function sendSearch(boxid)
 					resultsObj=data
 					
 					
-					Object.keys(resultsObj).forEach(function(key) {
+					/*Object.keys(resultsObj).forEach(function(key) {
 						//Here you will need to add a card for each result...
 						cardAdd(resultsObj[key])
 						
-					})		
+					})	*/
+					
+					for (index=0;index<=resultsObj.length;index++)
+					{
+						
+						cardAdd(resultsObj[index])
+					}
 				}else{
 					showError(true)
 					showResults(false)
