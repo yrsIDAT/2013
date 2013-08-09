@@ -270,6 +270,8 @@ p {
 }
 .cardbottom .cardtext {
 	width: 193px;
+	height: 190px;
+	overflow: hidden;
 	margin: 0;
 	position: absolute;
 	display: inline-block;

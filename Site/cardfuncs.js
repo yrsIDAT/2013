@@ -35,19 +35,19 @@ function cardAdd(cardData) //object=parsed JSON
 	{
 	
 		case TYPE_CINEMA:
-			if (cardData.showings != undefined)
+			if (cardData.data.events != undefined)
 			{
 				cardString=cardString+ "<p>Showings:</p>"
-				$.each(cardData.showings,function(index,movie)
+				$.each(cardData.data.events,function(index,movie)
 				{
 					cardString=cardString+ "<p>"+movie.title+"</p>"
-					if (movie.time!=null)
+					/*if (movie.time!=null)
 					{
 						$.each(movie.time,function(_,movietime)
 						{
 							cardString=cardString+"<p>-"+movietime+"</p>"
 						})
-					}
+					}*/
 				})
 			}
 			
