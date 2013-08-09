@@ -26,7 +26,7 @@ function cardAdd(cardData) //object=parsed JSON
 	{
 		cardString=cardString+ "</a>"
 	}
-	cardString=cardString+ "<p>Relevancy Score: " + cardData.score + "</p>"
+	//cardString=cardString+ "<p>Relevancy Score: " + cardData.score + "</p>"
 	if (cardData.postcode != "" && cardData.postcode != null)
 	{
 		cardString=cardString+ "<p>Postcode: " + cardData.postcode + "</p>"
