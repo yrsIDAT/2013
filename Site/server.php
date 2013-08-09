@@ -11,7 +11,8 @@
     //$location=$this->GEOLocation->try_all_methods();
 	$conditions = new Condition();
 	$conditions->_time = (float)date("G", time()) + ((float)date("i", time()))/60;
-	$conditions->position = new Position($_GET["lat"], $_GET["lon"]);
+	//$conditions->position = new Position($_GET["lat"], $_GET["lon"]);
+	$conditions->position = new Position(52.483056, -1.893611);//Fixed coordinates, how naughty
 	//get weather - $weather from weather.php, parameters (lat, lon)
 	$conditions->weather = new Weather($conditions->position->lat, $conditions->position->lon, $key->getkey("metoffice"));
 	//get string category list -  $categories from searchdecoder.php, parameters (searchstring)
@@ -32,7 +33,7 @@
 	//return results
 	header("Content-type: text/json");
 	$reply = json_encode($activities);
-	if ($reply == "" || $reply == null) $reply = "-1"; 
+	if ($reply == "" || $reply == null || sizeOf($activities) == 0) $reply = "-1"; 
 	echo($reply);
 /*
 	"activities":
@@ -83,6 +84,15 @@
 		{
 			$this->lat = $lat;
 			$this->lon = $lon;
+			if (!$lat || !$lon)
+			{
+				include "backend/APIs/geobytes.php";
+                $loc=new LocationManager();
+                $loc->get_web_location();
+                $this->lat=$loc->lat;
+                $this->lon=$loc->lon;
+            }
+
 		}
 	}
 ?>
