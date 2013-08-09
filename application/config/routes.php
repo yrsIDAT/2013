@@ -43,6 +43,7 @@ $route['default_controller'] = 'pages/view';
 $route['suggest'] = 'suggest/test';
 $route['search.json'] = 'suggest/test_json';
 $route['activities.json'] = 'suggest/activities_feed';
+$route['products.json'] = 'suggest/products_feed';
 
 $route['news/(:any)'] = 'news/view/$1';
 $route['news'] = 'news';

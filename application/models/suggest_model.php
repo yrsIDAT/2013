@@ -16,13 +16,35 @@ class Suggest_model extends CI_Model {
 		$places = $this->staticPlaces($lat,$lon);
 		$b = array();
 		foreach($places as $place):
+			$c = (object)array();
+			
 			$place->distance = $this->calculateDistance($lat,$lon,$place->lat,$place->lon);
 			$place->distance_adjusted = ($place->distance/1000) / $this->radius;
 			unset($place->source);
 			unset($place->expiry);
 			$place->score = NULL;
 
-			if($place->type == 2 && isset($place->postcode) && $place->postcode != "") {
+			$data = (object) array();
+			// add events
+				$id = $place->id;	
+				$query = $this->db->get_where('events',array('placeid'=>$id));
+				
+				if($query->num_rows() > 0) {
+					@$events = $query->result_object();
+					@$data->events = $events;
+				}
+				
+				// limit images
+
+				$images = explode(",",$place->images);
+				unset($place->images);
+				if(count($images ) > 0) {
+					
+					$image = $images[0];
+					$place->image = $image;
+				}
+
+			/*if($place->type == 2 && isset($place->postcode) && $place->postcode != "") {
 				// find movie times
 				$place->postcode = str_replace(" ","",$place->postcode);
 				$url1 = 'http://moviesapi.herokuapp.com/cinemas/find/' . $place->postcode;
@@ -35,7 +57,7 @@ class Suggest_model extends CI_Model {
 					$this->quickcache->addToCache($url1,$contents);
 				}
 				//$json = json_decode(file_get_contents($url1));
-				$cinema = $json[0];
+				/*$cinema = $json[0];
 				if(isset($cinema->venue_id)) {
 					$url2 = 'http://moviesapi.herokuapp.com/cinemas/' .  $cinema->venue_id . '/showings';
 					//$json2 = json_decode(file_get_contents($url2));
@@ -48,11 +70,14 @@ class Suggest_model extends CI_Model {
 					}
 					$place->showings = $json2;
 				}
-				
-			}
 
 
-			$b[] = $place;
+
+			}*/
+
+			$c = $place;
+			$c->data = $data;
+			$b[] = $c;
 
 		endforeach;
 		$places = $b;
@@ -81,6 +106,11 @@ class Suggest_model extends CI_Model {
 	private function getWeather($city) {
 		$query = $this->db->get_where('weather', array('city' => $city));
 		return $query->row_object();
+	}
+
+	public function getProducts() {
+		$query = $this->db->get('products');
+		return $query->result_object();
 	}
 
 	public function staticPlaces($lat,$lon) {

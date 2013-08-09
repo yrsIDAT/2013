@@ -2,3 +2,5 @@ application/config/database.php
 application/config/facebook.php
 application/config/apikeys.php
 backend/apikeys.php
+
+application/logs/log-2013-08-09.php

@@ -35,4 +35,11 @@ class Suggest extends CI_Controller {
     ->set_content_type('application/json')
     ->set_output(json_encode($data,JSON_NUMERIC_CHECK));
 	}
+
+	public function products_feed() {
+		$data = $this->suggest_model->getProducts();
+		$this->output
+    ->set_content_type('application/json')
+    ->set_output(json_encode($data,JSON_NUMERIC_CHECK));
+	}
 }

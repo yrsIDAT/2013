@@ -5,6 +5,7 @@ class Datagrab_model extends CI_Model {
 	{
 		$this->load->database();
 		$this->load->library('WeatherApi');
+		$this->load->library('quickcache');
 		$this->load->library('PlacesApi');
 	}
 
@@ -17,11 +18,11 @@ class Datagrab_model extends CI_Model {
 
 		foreach($locations as $location) {
 		//	$this->refreshWeather($location[1],$location[2]);
-		//	$this->refreshPlaces($location[1],$location[2]);
+			$this->refreshPlaces($location[1],$location[2]);
 		}
 
 		//$this->refreshProducts();
-		$this->refreshEvents();
+		//$this->refreshEvents();
 	}
 
 	private function refreshWeather($lat,$lon) {
@@ -131,26 +132,58 @@ class Datagrab_model extends CI_Model {
 
 	private function refreshEvents() {
     		$this->config->load('apikeys');
-
+    		$this->db->truncate('events');
     		$fscid = $this->config->item('fscid');
 			$fssecret = $this->config->item('fssecret');
 			
-
-			$query = $this->db->get_where('places',array('type'=>18));
+			$this->db->where('type', 18);
+			$this->db->or_where('type', 2); 
+			$query = $this->db->get('places');
 			foreach ($query->result() as $row)
 			{
-			   $url = 'https://api.foursquare.com/v2/venues/'.$row->sourceid.'/events';
+			   	$url = 'https://api.foursquare.com/v2/venues/'.$row->sourceid.'/events';
 				$key = '?v=20130805&client_id='.$fscid.'&client_secret='. $fssecret;
 				$query = '';
 				$full_url = $url . $key . $query;
-echo $full_url . "<br>";
-				echo "<pre>";
+//echo $full_url . "<br>";
+				//echo "<pre>";
 				$json = json_decode(file_get_contents($full_url));
-				print_r($json);
-				echo "</pre>";
+			//	print_r($json);
+			//	echo "</pre>";
 				if($json->response->events->count != 0) {
-				die();
+
+					$events = array();
+					foreach($json->response->events->items as $e):
+					//print_r($e); 
+						$event = array();
+						$event['title'] = $e->name;
+						$event['allday'] = $e->allDay;
+						$event['time'] = date("Y-m-d H:i:s",$e->date);
+						$event['placeid'] = $row->id;
+						$event['placetype'] = $row->type;
+						$event['sourceid'] = $e->id;
+						$event['type'] = $e->categories[0]->shortName;
+						if(isset($e->url)) {
+							$event['url'] = $e->url;
+						} else {
+							$event['url'] = NULL;
+						}
+						//print_r($event);
+						$events[] =$event;
+
+						//echo "E processed <br>";
+					//ob_flush();
+					//die();
+					endforeach;
+					
+					
+					foreach($events as $event) {
+
+						$this->db->insert('events',$event);
+					}
+				}
 			}
-			}
+
+
 	}
 }
