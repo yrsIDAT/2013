@@ -2,10 +2,6 @@ application/config/database.php
 application/config/facebook.php
 application/config/apikeys.php
 backend/apikeys.php
-<<<<<<< HEAD
-
 application/logs/log-2013-08-09.php
-=======
 Site/backend/apikeys.php
 application/logs/
->>>>>>> ff8525a399f70c425c3bf9e6284dd00a765cf2aa
