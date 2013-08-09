@@ -233,6 +233,10 @@ a {
 	height: 180px;
 	padding: 10px 10px 10px 8px;
 }
+.cardtext a {
+color: #000;
+text-decoration: underline;
+}
 .cardimage {
 	width: 134px;
 	height: 199px;
