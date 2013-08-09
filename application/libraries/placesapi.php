@@ -72,9 +72,12 @@
 			$scenicPoint = $this->quickCat('4bf58dd8d48988d165941735',17);
 			$all = array_merge($all,$scenicPoint);
 
-			$newAll = $this->getImage($all);
+			$musicVenues = $this->quickCat('4bf58dd8d48988d1e5931735',18);
+			$all = array_merge($all,$musicVenues);
+//$newAll = $this->getImage($all);
 			//$allPlaces = array_merge($beaches,$cinemas,$stadiums,$cafes,$malls,$recordShops,$bookShops,$videoGameShops);
-			return $newAll;
+			
+			return $all;
 		}
 
 		private function getImage($all) {
@@ -97,10 +100,9 @@
 					$images[] = $p->prefix . 'width'. '300'. $p->suffix;
 				}
 				if($array->meta->code == 200) {
-					$all[$i]['images'] = implode($images);
+					$all[$i]['images'] = implode($images,",");
 				}
-				print_r($all[$i]);
-				die();
+				
 				//echo 'images loaded ' . $i . ' / ' . count($all) . '<br>';
 			}
 			return $all;

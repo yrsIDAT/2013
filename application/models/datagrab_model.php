@@ -16,9 +16,12 @@ class Datagrab_model extends CI_Model {
 
 
 		foreach($locations as $location) {
-			$this->refreshWeather($location[1],$location[2]);
-			$this->refreshPlaces($location[1],$location[2]);
+		//	$this->refreshWeather($location[1],$location[2]);
+		//	$this->refreshPlaces($location[1],$location[2]);
 		}
+
+		//$this->refreshProducts();
+		$this->refreshEvents();
 	}
 
 	private function refreshWeather($lat,$lon) {
@@ -79,5 +82,75 @@ class Datagrab_model extends CI_Model {
 		}
 		echo $count . ' places updated <br>';
 
+	}
+	
+	private function refreshProducts() {
+		$products = array();
+		$gamesUrl = 'http://www.amazon.co.uk/gp/rss/bestsellers/videogames/ref=zg_bs_videogames_rsslink';
+		$games = $this->amazonRssToProducts($gamesUrl,8);
+		$products = array_merge($products,$games);
+
+		$booksUrl = 'http://www.amazon.co.uk/gp/rss/bestsellers/books/ref=zg_bs_books_rsslink';
+		$books = $this->amazonRssToProducts($booksUrl,7);
+		$products = array_merge($products,$books);
+
+		$musicUrl = 'http://www.amazon.co.uk/gp/rss/bestsellers/music/ref=zg_bs_music_rsslink';
+		$music = $this->amazonRssToProducts($musicUrl,6);
+		$products = array_merge($products,$music);
+
+		$this->db->truncate('products');
+		foreach($products as $product) {
+			$this->db->insert('products',$product);
+		}
+	}
+
+	private function amazonRssToProducts($amazonurl,$typeno) {
+		$xml = simplexml_load_file($amazonurl);
+		$products = array();
+		foreach($xml->channel->item as $product) {
+			//echo "<pre>";
+		
+			$html = ((string)$product->description);
+			$game = array();
+			$game['title'] =(string)substr($product->title,4);
+			$game['url'] = (string)$product->link;
+			$doc = new DOMDocument();
+		  $doc->strictErrorChecking = FALSE;
+		  @$doc->loadHTML($html);
+		  $dxml = simplexml_import_dom($doc);
+			$game['image'] = (string)$dxml->body->div->a->img->attributes()->src;
+			$game['placetype'] = $typeno;
+			$products[] = $game;
+
+			//print_r($game);
+			//echo "</pre>";
+		}
+		return $products;
+
+	}
+
+	private function refreshEvents() {
+    		$this->config->load('apikeys');
+
+    		$fscid = $this->config->item('fscid');
+			$fssecret = $this->config->item('fssecret');
+			
+
+			$query = $this->db->get_where('places',array('type'=>18));
+			foreach ($query->result() as $row)
+			{
+			   $url = 'https://api.foursquare.com/v2/venues/'.$row->sourceid.'/events';
+				$key = '?v=20130805&client_id='.$fscid.'&client_secret='. $fssecret;
+				$query = '';
+				$full_url = $url . $key . $query;
+echo $full_url . "<br>";
+				echo "<pre>";
+				$json = json_decode(file_get_contents($full_url));
+				print_r($json);
+				echo "</pre>";
+				if($json->response->events->count != 0) {
+				die();
+			}
+			}
 	}
 }
