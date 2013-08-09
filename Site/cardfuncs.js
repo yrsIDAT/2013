@@ -31,6 +31,10 @@ function cardAdd(cardData) //object=parsed JSON
 	{
 		cardString=cardString+ "<p>Postcode: " + cardData.postcode + "</p>"
 	}
+	if (cardData.image != "")
+	{
+		cardString=cardString+"<div style=\"background-image: url("+cardData.image+");\" class=\"cardimage\"></div>"
+	}
 	switch(cardData.type)
 	{
 	
