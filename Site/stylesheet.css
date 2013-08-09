@@ -243,13 +243,12 @@ display: inline-block;
 .cardimage {
 width: 134px;
 height: 200px;
-text-align: right;
-float: right;
 border-top-right-radius: 5px;
 border-left: 1px solid #c0c0c0;
 margin-top: -10px;
 position: relative;
-left: 8px;
+display: inline-block;
+left: 207px;
 border-bottom-right-radius: 5px;
 }
 h2 {
@@ -270,7 +269,10 @@ p {
 	margin-left: 3px;
 }
 .cardbottom .cardtext {
-	width: 334px;
+	width: 193px;
+	margin: 0;
+	position: absolute;
+	display: inline-block;
 }
 .shadow {
 	width: 225px;
