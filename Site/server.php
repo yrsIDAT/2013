@@ -83,13 +83,15 @@
 		{
 			$this->lat = $lat;
 			$this->lon = $lon;
-            if (!$lat || !$lon) {
-                include "backend/APIs/geobytes.php";
+			if (!$lat || !$lon)
+			{
+				include "backend/APIs/geobytes.php";
                 $loc=new LocationManager();
                 $loc->get_web_location();
                 $this->lat=$loc->lat;
                 $this->lon=$loc->lon;
             }
+
 		}
 	}
 ?>
