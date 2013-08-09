@@ -5,12 +5,14 @@
 		private $fssecret;
 		private $lat;
 		private $lon;
+		private $quickcache;
 		function __construct()
 		{
 			
 			$CI =& get_instance();
     		$CI->config->load('apikeys');
-
+			//$CI->load->library('quickcache');
+			//$quickcache = $CI->quickcache;
     		$this->fscid = $CI->config->item('fscid');
 			$this->fssecret = $CI->config->item('fssecret');
 		}
@@ -257,14 +259,15 @@
 			$query = '&ll='.$this->lat.','.$this->lon.'&radius=5000&categoryId='.$catID.'&intent=browse';
 			$url1 = $url . $key . $query;
 
-			//$json = file_get_contents($full_url);
-			if($this->quickcache->isCached($url1)) {
+			$json = file_get_contents($url1);
+			/*if($this->quickcache->isCached($url1)) {
 					$json = json_decode($this->quickcache->retrieveFromCache($url1));
 				} else {
 					$contents = file_get_contents($url1);
 					$json = json_decode($contents);
 					$this->quickcache->addToCache($url1,$contents);
-				}
+				}*/
+
 			$array = json_decode($json);
 			$code = $array->meta->code;
 			$aplaces = array();
