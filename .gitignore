@@ -2,3 +2,4 @@ application/config/database.php
 application/config/facebook.php
 application/config/apikeys.php
 backend/apikeys.php
+Site/backend/apikeys.php
