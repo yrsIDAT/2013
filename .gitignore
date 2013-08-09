@@ -3,3 +3,4 @@ application/config/facebook.php
 application/config/apikeys.php
 backend/apikeys.php
 Site/backend/apikeys.php
+application/logs/
