@@ -82,7 +82,9 @@ function sendSearch(boxid)
 		showResults(false)
 		showLoading(true)
 		
-		
+		if (!geoObj) {
+            geoObj={coords:{latitude:"",longitude:""}}
+        }
 		$.ajax({url:queryPage, data:{ query: sendQuery, lat: geoObj.coords.latitude, lon: geoObj.coords.longitude }, 
 		success:function(data,textStatus)
 			{
@@ -90,7 +92,7 @@ function sendSearch(boxid)
 				showLoading(false)
 				showResults(true)
 				resultsObj=data
-				if (data!="-1" && data!="[ ]" && resultsObj === Object(resultsObj))
+				if (data!=-1 && data!=[ ] && resultsObj === Object(resultsObj))
 				{
 					var numberofcardstoshow = resultsObj.length
 					if (numberofcardstoshow > 24) numberofcardstoshow = 24
