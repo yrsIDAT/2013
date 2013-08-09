@@ -17,7 +17,7 @@ class Search {
     // The master class
 	public $categoryanalysis;
     public function __construct($searchstring) {
-		$this->categoryanalysis = array_fill(0, 44, 0); // fill an empty array from index 0 to 44 with 0 as default value
+		$this->categoryanalysis = array_fill(0, 50, 0); // fill an empty array from index 0 to 44 with 0 as default value
         /*$YQL=new YahooSQL();
         $GEOLocation=new LocationManager();
         $alc=new AlcAPI();
@@ -162,6 +162,7 @@ class Search {
 			new Keyword("green", 16, 0.5),
 			new Keyword("grass", 16, 0.5),
 			new Keyword("nature", 16, 0.5),
+			new Keyword("walk", 16, 0.5),
 			new Keyword("relax", 16, 0.5),
 			new Keyword("sun", 16, 0.5),
 			new Keyword("enjoy", 16, 0.5),
@@ -173,10 +174,19 @@ class Search {
 			new Keyword("view", 17, 0.7),
 			new Keyword("park", 17, 0.7),
 			new Keyword("nature", 17, 0.5),
+			new Keyword("walk", 17, 0.5),
 			new Keyword("green", 17, 0.5),
 			new Keyword("see", 17, 0.5),
 			new Keyword("watch", 17, 0.5),
-			new Keyword("far", 17, 0.5)
+			new Keyword("far", 17, 0.5),
+			new Keyword("music", 18, 0.6),
+			new Keyword("music venue", 18, 0.4),//lower as it builds on music
+			new Keyword("concert", 18, 0.8),
+			new Keyword("listen", 18, 0.5),
+			new Keyword("fun", 18, 0.3),
+			new Keyword("gig", 18, 0.5),
+			new Keyword("band", 18, 0.5),
+			new Keyword("group", 18, 0.5)
 		);
 		$search = strtolower($search);
 		$length = sizeOf($keywords);
