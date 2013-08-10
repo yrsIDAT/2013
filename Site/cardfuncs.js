@@ -31,27 +31,23 @@ function cardAdd(cardData) //object=parsed JSON
 	{
 		cardString=cardString+ "<p>Postcode: " + cardData.postcode + "</p>"
 	}
-	if (cardData.image != "")
-	{
-		cardString=cardString+"<div style=\"background-image: url("+cardData.image+");\" class=\"cardimage\"></div>"
-	}
 	switch(cardData.type)
 	{
 	
 		case TYPE_CINEMA:
-			if (cardData.showings != undefined)
+			if (cardData.data.events != undefined)
 			{
 				cardString=cardString+ "<p>Showings:</p>"
-				$.each(cardData.showings,function(index,movie)
+				$.each(cardData.data.events,function(index,movie)
 				{
 					cardString=cardString+ "<p>"+movie.title+"</p>"
-					if (movie.time!=null)
+					/*if (movie.time!=null)
 					{
 						$.each(movie.time,function(_,movietime)
 						{
 							cardString=cardString+"<p>-"+movietime+"</p>"
 						})
-					}
+					}*/
 				})
 			}
 			
@@ -60,7 +56,12 @@ function cardAdd(cardData) //object=parsed JSON
 		default:
 	
 	}
-	cardString=cardString+"</div></div></div>"
+	cardString=cardString+"</div>"
+	if (cardData.image != "")
+	{
+		cardString=cardString+"<div style=\"background-image: url("+cardData.image+");\" class=\"cardimage\"></div>"
+	}
+	cardString=cardString+"</div></div>"
 	var newCard=$(cardString)
 	$("#cardcontainer").append(newCard)
 }
