@@ -44,6 +44,12 @@ class Suggest_model extends CI_Model {
 					$place->image = $image;
 				}
 
+			// add products
+				$hasProducts = array(6,7,8);
+				if(in_array($place->type,$hasProducts)) {
+					$data->product = $this->getAProduct($place->type);
+				}
+
 			/*if($place->type == 2 && isset($place->postcode) && $place->postcode != "") {
 				// find movie times
 				$place->postcode = str_replace(" ","",$place->postcode);
@@ -111,6 +117,16 @@ class Suggest_model extends CI_Model {
 	public function getProducts() {
 		$query = $this->db->get('products');
 		return $query->result_object();
+	}
+
+	public function getAProduct($type) {
+		$query = $this->db->get_where('products',array('placetype'=>$type));
+		if($query->num_rows() > 0) {
+			return $query->row_object();
+
+		} else{
+			return false;
+		}
 	}
 
 	public function staticPlaces($lat,$lon) {
