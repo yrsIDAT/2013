@@ -120,6 +120,7 @@ class Suggest_model extends CI_Model {
 	}
 
 	public function getAProduct($type) {
+		 $this->db->order_by('id', 'RANDOM');
 		$query = $this->db->get_where('products',array('placetype'=>$type));
 		if($query->num_rows() > 0) {
 			return $query->row_object();
