@@ -33,7 +33,11 @@
 $(document).ready(function(){
     inputs=$('input[type=text]')
     inputs.bind('keyup', function(e){
-        inputs.val(e.target.value)
+        inputs.each(function(i, input) {
+            if (input!=e.target) {
+                input.value=e.target.value
+            }
+        })
     })
     $(document.s).bind('submit', function(event){
         event.preventDefault()
@@ -111,7 +115,7 @@ $(document).ready(function(){
 <div id="loading">
 	<div id="loader"></div>
 </div>
-<div id="errormessage" class="resultmessage" style="text-align:center;"> 404 - We sincerely apologise; we cannot complete your request. Fix your internet old chap and give it another shot, eh?  </div><!-- Message here -->
+<div id="errormessage" class="resultmessage" style="text-align:center;"> 404 - We sincerely apologise; we cannot complete your request. Do fix your internet old chap and give it another shot, eh?  </div><!-- Message here -->
 <div id="resultscontainer">
 	<div class="resultmessage"> We've found the following things for you to do </div><!-- Message here -->
 	<div id="cardcontainer" class="content"> 
