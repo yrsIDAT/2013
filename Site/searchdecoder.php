@@ -65,6 +65,12 @@ class Search {
 			new Keyword("restaurant", 3, 1),
 			new Keyword("food", 3, 0.75),
 			new Keyword("eat", 3, 0.5),
+			new Keyword("breakfast", 3, 0.5),
+			new Keyword("lunch", 3, 0.5),
+			new Keyword("brunch", 3, 0.5),
+			new Keyword("dinner", 3, 0.5),
+			new Keyword("tea", 3, 0.3),
+			new Keyword("supper", 3, 0.5),
 			new Keyword("hungry", 3, 0.4),
 			new Keyword("drink", 3, 0.4),
 			new Keyword("stadium", 4, 1),
@@ -74,6 +80,7 @@ class Search {
 			new Keyword("sport", 4, 0.3),
 			new Keyword("shop", 5, 1),
 			new Keyword("buy", 5, 0.7),
+			new Keyword("purchase", 5, 0.7),
 			new Keyword("mall", 5, 0.8),
 			new Keyword("things", 5, 0.3),
 			new Keyword("stuff", 5, 0.3),
@@ -82,6 +89,7 @@ class Search {
 			new Keyword("goods", 5, 0.3),
 			new Keyword("music", 6, 1),
 			new Keyword("buy", 6, 0.5),
+			new Keyword("purchase", 6, 0.5),
 			new Keyword("listen", 6, 0.8),
 			new Keyword("record", 6, 0.8),
 			new Keyword("rock", 6, 0.5),
@@ -120,6 +128,8 @@ class Search {
 			new Keyword("play", 8, 0.5),
 			new Keyword("game", 8, 1),
 			new Keyword("fun", 8, 0.5),
+			new Keyword("buy", 8, 0.3),
+			new Keyword("purchase", 8, 0.3),
 			new Keyword("computer", 8, 0.8),
 			new Keyword("water", 9, 0.5),
 			new Keyword("fish", 9, 0.65),
@@ -186,7 +196,10 @@ class Search {
 			new Keyword("fun", 18, 0.3),
 			new Keyword("gig", 18, 0.5),
 			new Keyword("band", 18, 0.5),
-			new Keyword("group", 18, 0.5)
+			new Keyword("group", 18, 0.5),
+			new Keyword("dance", 18, 0.5),
+			new Keyword("rave", 18, 0.5),
+			new Keyword("mosh", 18, 0.5)
 		);
 		$search = strtolower($search);
 		$length = sizeOf($keywords);

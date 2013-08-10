@@ -115,7 +115,7 @@ function sendSearch(boxid)
 				showResults(false)
 				showLoading(false)
 			}
-			,timeout:60000
+			,timeout:30000
 		})
 		
 	

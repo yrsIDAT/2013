@@ -53,6 +53,54 @@ function cardAdd(cardData) //object=parsed JSON
 			
 			break
 			
+			case TYPE_RECORDSHOP:
+				if (cardData.data.product != undefined)
+				{
+					cardString=cardString+ "<p>Recommended:</p>"
+					if (cardData.data.product.url != "")
+					{
+						cardString=cardString+ "<a href=\""+cardData.data.product.url+"\">"
+					}
+					cardString=cardString+ "<p>"+cardData.data.product.title+"</p>"
+					if (cardData.data.product.url != "")
+					{
+						cardString=cardString+ "</a>"
+					}
+				}
+			break
+			
+			case TYPE_BOOKSHOP:
+				if (cardData.data.product != undefined)
+				{
+					cardString=cardString+ "<p>Recommended:</p>"
+					if (cardData.data.product.url != "")
+					{
+						cardString=cardString+ "<a href=\""+cardData.data.product.url+"\">"
+					}
+					cardString=cardString+ "<p>"+cardData.data.product.title+"</p>"
+					if (cardData.data.product.url != "")
+					{
+						cardString=cardString+ "</a>"
+					}
+				}
+			break
+			
+			case TYPE_VIDEOGAMES:
+				if (cardData.data.product != undefined)
+				{
+					cardString=cardString+ "<p>Recommended:</p>"
+					if (cardData.data.product.url != "")
+					{
+						cardString=cardString+ "<a href=\""+cardData.data.product.url+"\">"
+					}
+					cardString=cardString+ "<p>"+cardData.data.product.title+"</p>"
+					if (cardData.data.product.url != "")
+					{
+						cardString=cardString+ "</a>"
+					}
+				}
+			break
+			
 		default:
 	
 	}

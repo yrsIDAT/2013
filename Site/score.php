@@ -1,41 +1,48 @@
 <?php
 	function calculateScores($activities, $conditions, $categories)
 	{
-		$weightings = Array(
-			new Weighting(0, 0, Array()),
-			new Weighting(1, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//1-beach
-			new Weighting(-0.5, 0.5, Array(new TimeFeel(0, 0), new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(21, 0.8))),//2-cinema
-			new Weighting(0.2, 1, Array(new TimeFeel(6, -1), new TimeFeel(10, 1), new TimeFeel(11.5, 0), new TimeFeel(13, 1), new TimeFeel(16, 0), new TimeFeel(19, 1), new TimeFeel(23,-1))),//3-cafe
-			new Weighting(0.25, 0.2, Array(new TimeFeel(0, -0.5), new TimeFeel(6, -0.5), new TimeFeel(12, 0.5), new TimeFeel(21, 0.5))),//4-stadium
-			new Weighting(0, 0.5, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//mall
-			new Weighting(0, 0.5, Array(new TimeFeel(6, -1), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//record shop
-			new Weighting(0, 0.5, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//book shop
-			new Weighting(0, 0, Array(new TimeFeel(0, 0))),//video game
-			new Weighting(0, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(16, 0.8), new TimeFeel(21, -0.8))),//aquarium
-			new Weighting(0, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1))),//museum
-			new Weighting(0.5, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(16, 0.8), new TimeFeel(21, -0.8))),//zoo
-			new Weighting(-0.5, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(20, 0.8), new TimeFeel(23, -0.8))),//bowling
-			new Weighting(1, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(16, 0.8), new TimeFeel(21, -0.8))),//water park
-			new Weighting(0, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//art gallery
-			new Weighting(0.75, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(16, 0.8), new TimeFeel(21, -0.8))),//theme park
-			new Weighting(1, 0.6, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(20, 0.8), new TimeFeel(23, -0.8))),//park
-			new Weighting(1, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//scenic point
-			new Weighting(0.8, 0.2, Array(new TimeFeel(0, -0.8), new TimeFeel(9, -0.8), new TimeFeel(12, 0.4), new TimeFeel(15, 0.8), new TimeFeel(21, 0.8)))//music venue
-		);
-		
-		$activitiesLength = sizeOf($activities);
-		for ($i = 0; $i < $activitiesLength; $i++)
+		if ($activities == -1)
 		{
-			$activities[$i]->score = 0;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->condition * getConditionNumber($conditions->weather->type) / 10;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * standardise($conditions->weather->temperature, 30, 0) / 10;
-			$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * standardise($conditions->weather->precipitation, 50, 0) / 10;
-			
-			$activities[$i]->score += $weightings[$activities[$i]->type]->distance * standardise($activities[$i]->distance, 0, 30000) / 10;
-			$activities[$i]->score += timeAppropriateness($weightings[$activities[$i]->type]->timefeel, $conditions->_time) / 5;
-			$activities[$i]->score += $categories[$activities[$i]->type];
+			return -1;
 		}
-		return $activities;
+		else
+		{
+			$weightings = Array(
+				new Weighting(0, 0, Array()),
+				new Weighting(1, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//1-beach
+				new Weighting(-0.5, 0.5, Array(new TimeFeel(0, 0), new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(21, 0.8))),//2-cinema
+				new Weighting(0.2, 1, Array(new TimeFeel(6, -1), new TimeFeel(10, 1), new TimeFeel(11.5, 0), new TimeFeel(13, 1), new TimeFeel(16, 0), new TimeFeel(19, 1), new TimeFeel(23,-1))),//3-cafe
+				new Weighting(0.25, 0.2, Array(new TimeFeel(0, -0.5), new TimeFeel(6, -0.5), new TimeFeel(12, 0.5), new TimeFeel(21, 0.5))),//4-stadium
+				new Weighting(0, 0.5, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//mall
+				new Weighting(0, 0.5, Array(new TimeFeel(6, -1), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//record shop
+				new Weighting(0, 0.5, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//book shop
+				new Weighting(0, 0, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//video game store
+				new Weighting(0, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(16, 0.8), new TimeFeel(21, -0.8))),//aquarium
+				new Weighting(0, 0.3, Array(new TimeFeel(6, -1), new TimeFeel(12, 1), new TimeFeel(16, 1), new TimeFeel(21, -1))),//museum
+				new Weighting(0.5, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(16, 0.8), new TimeFeel(21, -0.8))),//zoo
+				new Weighting(-0.5, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(20, 0.8), new TimeFeel(23, -0.8))),//bowling
+				new Weighting(1, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(16, 0.8), new TimeFeel(21, -0.8))),//water park
+				new Weighting(0, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//art gallery
+				new Weighting(0.75, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(16, 0.8), new TimeFeel(21, -0.8))),//theme park
+				new Weighting(1, 0.6, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(20, 0.8), new TimeFeel(23, -0.8))),//park
+				new Weighting(1, 0.3, Array(new TimeFeel(6, -0.8), new TimeFeel(12, 0.8), new TimeFeel(18, 0.8), new TimeFeel(21, -0.8))),//scenic point
+				new Weighting(0.8, 0.2, Array(new TimeFeel(0, -0.8), new TimeFeel(9, -0.8), new TimeFeel(12, 0.4), new TimeFeel(15, 0.8), new TimeFeel(21, 0.8)))//music venue
+			);
+			
+			$activitiesLength = sizeOf($activities);
+			for ($i = 0; $i < $activitiesLength; $i++)
+			{
+				$activities[$i]->score = 0;
+				$activities[$i]->score += $weightings[$activities[$i]->type]->condition * getConditionNumber($conditions->weather->type) / 10;
+				$activities[$i]->score += $weightings[$activities[$i]->type]->temperature * standardise($conditions->weather->temperature, 30, 0) / 10;
+				$activities[$i]->score += $weightings[$activities[$i]->type]->precipitation * standardise($conditions->weather->precipitation, 50, 0) / 10;
+				
+				$activities[$i]->score += $weightings[$activities[$i]->type]->distance * standardise($activities[$i]->distance, 0, 30000) / 10;
+				$activities[$i]->score += timeAppropriateness($weightings[$activities[$i]->type]->timefeel, $conditions->_time) / 5;
+				$activities[$i]->score += $categories[$activities[$i]->type];
+			}
+			return $activities;
+		}
 	}
 	
 	function timeAppropriateness($timefeel, $time)

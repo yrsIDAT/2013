@@ -23,17 +23,20 @@
 	//calculate score - $activities from score.php, parameters, (activities, conditions, categories)
 	$activities = calculateScores($activities, $conditions, $categories);
 	//order results
-	usort($activities, function($a, $b) {
-		    if( $a->score < $b->score) {
-		    	return 1;
-		    } else {
-		    	return 0;
-		    }
-		});
+	if ($activities != -1)
+	{
+		usort($activities, function($a, $b) {
+				if( $a->score < $b->score) {
+					return 1;
+				} else {
+					return 0;
+				}
+			});
+	}
 	//return results
 	header("Content-type: text/json");
 	$reply = json_encode($activities);
-	if ($reply == "" || $reply == null || sizeOf($activities) == 0) $reply = "-1"; 
+	if ($reply == "" || $reply == null || sizeOf($activities) == 0 || $activities == -1) $reply = "-1"; 
 	echo($reply);
 /*
 	"activities":
