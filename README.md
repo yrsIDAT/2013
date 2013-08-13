@@ -1,6 +1,6 @@
 # Things 2 Do
 
-[Things2Do][] was our group submission to [Young Rewired State 2013][]. It's a 
+[Things2Do][] was our group submission to [Young Rewired State 2013][yrs]. It's a 
 simple search driven service which collates a combination of different data sources 
 (for places, weather forecasts, movies, etc) and combines these to give a smart 
 result based on your location (and what you wish to do). It looks like this:
