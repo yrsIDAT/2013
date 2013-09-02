@@ -5,7 +5,7 @@ simple search driven service which collates a combination of different data sour
 (for places, weather forecasts, movies, etc) and combines these to give a smart 
 result based on your location (and what you wish to do). It looks like this:
 
-![Screenshot](https://raw.github.com/yrsIDAT/2013/master/screenshots/overview.png)
+![Screenshot](https://raw.github.com/yrsIDAT/2013/master/screenshots/overview.jpg)
 
 It's written in PHP, using the CodeIgniter framework. The web interface is
 responsive and has been tested over a wide variety of devices. But, there's still
