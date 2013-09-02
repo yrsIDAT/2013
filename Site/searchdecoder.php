@@ -1,39 +1,12 @@
 <?php
-/*
-// Begin Standard Definitions
-define("THINGS2DO", true);
-include "backend/keystore.php";
-include "backend/apikeys.php";
-// End Standard Definitions
-
-include "backend/APIs/YahooSQL.php";
-include "backend/APIs/alcemyapi.php";
-
-define("QUERY_MODE", "GET"); //what method do we recieve a query
-define("LAT_LON_MODE", "GET"); //what method do we recieve the latitude and logitude
-*/
 
 class Search {
-    // The master class
 	public $categoryanalysis;
     public function __construct($searchstring) {
-		$this->categoryanalysis = array_fill(0, 50, 0); // fill an empty array from index 0 to 44 with 0 as default value
-        /*$YQL=new YahooSQL();
-        $GEOLocation=new LocationManager();
-        $alc=new AlcAPI();
-        // use yahoo content analysis
-        $analysis=$YQL->do_contentanalysis_query($searchstring);
-        // use alchemyapi
-        $category=$alc->get_category($searchstring);
-		$this->categoryanalysis = categorytoid($analysis, $category);*/
+		$this->categoryanalysis = array_fill(0, 50, 0);
 		$this->categoryanalysis = $this->MikeSearchStringAlgorithm($this->categoryanalysis, $searchstring);
     }
-	
-	function categorytoid($analysis, $category)
-	{
-		
-	}
-	
+
 	function MikeSearchStringAlgorithm($categoryanalysis, $search)
 	{
 		$keywords = array(
